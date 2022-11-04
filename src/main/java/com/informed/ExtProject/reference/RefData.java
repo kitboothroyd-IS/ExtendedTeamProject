@@ -7,8 +7,7 @@ public abstract class RefData {
     private String name;
     private String symbol;
 
-    public RefData(int id, String name, String symbol){
-        this.id = id;
+    public RefData(String name, String symbol){
         this.name = name;
         setSymbol(symbol);
     }

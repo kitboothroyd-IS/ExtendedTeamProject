@@ -1,11 +1,9 @@
 package com.informed.ExtProject.reference;
 
 public class Exchange extends RefData{
-    private static int newId = 1;
 
     public Exchange(String name, String symbol) {
-        super(newId, name, symbol);
-        newId++;
+        super(name, symbol);
     }
 
     @Override
