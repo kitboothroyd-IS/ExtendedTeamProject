@@ -1,13 +1,11 @@
 package com.informed.ExtProject.server;
 
-import com.informed.ExtProject.dao.AddressDAO;
+import com.informed.ExtProject.dao.address.AddressDAO;
 import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.exception.NotInListException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
