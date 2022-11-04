@@ -1,7 +1,5 @@
 package com.informed.ExtProject.domain;
 
-import com.informed.ExtProject.server.AddressService;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

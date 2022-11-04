@@ -1,4 +1,4 @@
-package com.informed.ExtProject.dao;
+package com.informed.ExtProject.dao.address;
 
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.repo.AddressRepo;
