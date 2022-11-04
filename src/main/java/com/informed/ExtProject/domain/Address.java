@@ -3,7 +3,6 @@ package com.informed.ExtProject.domain;
 import com.informed.ExtProject.server.AddressService;
 
 public class Address {
-    private static int newId = 1;
 
     private int id;
     private String line1;
@@ -14,8 +13,6 @@ public class Address {
     private String postcode;
 
     public Address(String line1, String line2, String line3, String city, String county, String postcode) {
-        this.id = newId;
-        newId++;
         this.line1 = line1;
         this.line2 = line2;
         this.line3 = line3;

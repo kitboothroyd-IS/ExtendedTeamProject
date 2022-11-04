@@ -6,7 +6,6 @@ import com.informed.ExtProject.reference.Exchange;
 import java.util.Date;
 
 public class EquityTrade {
-    private static int newId = 1;
 
     private int id;
     private CounterParty counterParty1;
@@ -19,8 +18,6 @@ public class EquityTrade {
     private Exchange exchange;
 
     public EquityTrade(CounterParty counterParty1, CounterParty counterParty2, Date agreementDate, Equity equity, int amount, Double price, Currency currency, Exchange exchange) {
-        this.id = newId;
-        newId++;
         this.counterParty1 = counterParty1;
         this.counterParty2 = counterParty2;
         this.agreementDate = agreementDate;

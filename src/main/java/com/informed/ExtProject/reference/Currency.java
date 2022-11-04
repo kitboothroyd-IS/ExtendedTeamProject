@@ -1,11 +1,9 @@
 package com.informed.ExtProject.reference;
 
 public class Currency extends RefData{
-    private static int newId = 1;
 
     public Currency(String name, String symbol) {
-        super(newId, name, symbol);
-        newId++;
+        super(name, symbol);
     }
 
     @Override
