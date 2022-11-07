@@ -1,22 +1,29 @@
 package com.informed.ExtProject.server;
 
+import com.informed.ExtProject.dao.equityTrade.EquityTradeDAO;
 import com.informed.ExtProject.domain.EquityTrade;
 import com.informed.ExtProject.exception.NotInListException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class EquityTradeService {
-    private static List<EquityTrade> equityTradeList = new ArrayList<EquityTrade>();
+    private EquityTradeDAO equityTradeDAO;
 
-    public static void addEquityTrade(EquityTrade equityTrade) {
-        equityTradeList.add(equityTrade);
+    @Autowired
+    public void setDao(@Qualifier("repoEquityTradeDAO") EquityTradeDAO equityTradeDAO) {
+        this.equityTradeDAO = equityTradeDAO;
     }
 
-    public static void deleteEquityTrade(EquityTrade equityTrade) {
-        if (!equityTradeList.contains(equityTrade)) {
-            throw new NotInListException("equity trade");
-        }
-        equityTradeList.remove(equityTrade);
+    public List<EquityTrade> getAllEquityTrades() {
+        return equityTradeDAO.getAllEquityTrades();
+    }
+
+    public void addEquityTrade(EquityTrade equityTrade) {
+        equityTradeDAO.addEquityTrade(equityTrade);
     }
 }

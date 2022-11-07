@@ -2,11 +2,23 @@ package com.informed.ExtProject.reference;
 
 import com.informed.ExtProject.exception.NoSymbolException;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class RefData {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @NotNull
     private String name;
+    @NotNull
     private String symbol;
 
+    public RefData() {
+
+    }
     public RefData(String name, String symbol){
         this.name = name;
         setSymbol(symbol);
