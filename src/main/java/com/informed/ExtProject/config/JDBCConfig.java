@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @ComponentScan(basePackages = {"com.informed.ExtProject.dao"})
-@EntityScan(basePackages = {"com.informed.ExtProject.domain"})
+@EntityScan(basePackages = {"com.informed.ExtProject.domain", "com.informed.ExtProject.reference"})
 @EnableJpaRepositories(basePackages = {"com.informed.ExtProject.repo"})
 public class JDBCConfig {
 
