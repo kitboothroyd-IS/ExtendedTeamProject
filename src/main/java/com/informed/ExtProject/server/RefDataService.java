@@ -55,7 +55,7 @@ public class RefDataService {
     * Use recursion to call the function a second time with the inverse of the exchange rate...
     * i.e. {destinationCurrency={originCurrency=1/exchangeRate}}
     * */
-    public static void AddExchangeRate (ForeignExchangeRate foreignExchangeRate) {
+    public static void AddExchangeRate (ForeignExchangeRates foreignExchangeRate) {
 
         HashMap<Currency, Double> sub_map = new HashMap<>();
         sub_map.put(foreignExchangeRate.destinationCurrency, foreignExchangeRate.exchangeRate);
@@ -71,7 +71,7 @@ public class RefDataService {
         if (foreignExchangeMaxIterations == 2) {
             foreignExchangeMaxIterations--;
             double reverseExchangeRate = 1 / foreignExchangeRate.exchangeRate;
-            ForeignExchangeRate reverseExchangeRateObj = new ForeignExchangeRate(foreignExchangeRate.destinationCurrency,
+            ForeignExchangeRates reverseExchangeRateObj = new ForeignExchangeRates(foreignExchangeRate.destinationCurrency,
                     foreignExchangeRate.originCurrency,
                     reverseExchangeRate);
             AddExchangeRate(reverseExchangeRateObj);
