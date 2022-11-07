@@ -42,6 +42,10 @@ public class EquityTrade {
     @JoinColumn(name="exchangeId", nullable = false)
     private Exchange exchange;
 
+    public EquityTrade() {
+
+    }
+
     public EquityTrade(CounterParty counterParty1, CounterParty counterParty2, Date agreementDate, Equity equity, int amount, Double price, Currency currency, Exchange exchange) {
         this.counterParty1 = counterParty1;
         this.counterParty2 = counterParty2;
@@ -50,6 +54,74 @@ public class EquityTrade {
         this.amount = amount;
         this.price = price;
         this.currency = currency;
+        this.exchange = exchange;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public CounterParty getCounterParty1() {
+        return counterParty1;
+    }
+
+    public void setCounterParty1(CounterParty counterParty1) {
+        this.counterParty1 = counterParty1;
+    }
+
+    public CounterParty getCounterParty2() {
+        return counterParty2;
+    }
+
+    public void setCounterParty2(CounterParty counterParty2) {
+        this.counterParty2 = counterParty2;
+    }
+
+    public Date getAgreementDate() {
+        return agreementDate;
+    }
+
+    public void setAgreementDate(Date agreementDate) {
+        this.agreementDate = agreementDate;
+    }
+
+    public Equity getEquity() {
+        return equity;
+    }
+
+    public void setEquity(Equity equity) {
+        this.equity = equity;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(Exchange exchange) {
         this.exchange = exchange;
     }
 }
