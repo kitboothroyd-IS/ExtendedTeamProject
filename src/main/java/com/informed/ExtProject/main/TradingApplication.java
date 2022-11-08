@@ -11,6 +11,7 @@ public class TradingApplication
 {
     public static void main( String[] args ) {
 
+
         System.out.println("========================");
         System.out.println(("Starting Spring Boot"));
         System.out.println("========================");
@@ -20,5 +21,6 @@ public class TradingApplication
         System.out.println("========================");
         System.out.println("Server ready");
         System.out.println("========================");
+
     }
 }
