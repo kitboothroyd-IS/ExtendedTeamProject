@@ -1,6 +1,9 @@
 package com.informed.ExtProject.domain;
 
+import org.hibernate.annotations.Check;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -10,7 +13,7 @@ public class CounterParty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
+    @NotBlank
     private String name;
     private String phoneNumber;
     private String emailAddress;

@@ -1,6 +1,9 @@
 package com.informed.ExtProject.domain;
 
+import org.hibernate.annotations.Check;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -10,15 +13,15 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
+    @NotBlank
     private String line1;
     private String line2;
     private String line3;
-    @NotNull
+    @NotBlank
     private String city;
-    @NotNull
+    @NotBlank
     private String county;
-    @NotNull
+    @NotBlank
     private String postcode;
 
     public Address() {
