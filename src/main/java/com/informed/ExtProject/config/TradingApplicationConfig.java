@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages =
         {"com.informed.ExtProject.server",
         "com.informed.ExtProject.controller"})
-@EnableAutoConfiguration
-@EnableTransactionManagement
+//@EnableAutoConfiguration -- shouldnt need this
+@EnableTransactionManagement // or this in fact
 public class TradingApplicationConfig {
 }

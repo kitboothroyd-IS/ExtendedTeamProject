@@ -4,6 +4,7 @@ import com.informed.ExtProject.controller.domain.AddressController;
 import com.informed.ExtProject.dao.domain.address.AddressDAO;
 import com.informed.ExtProject.dao.domain.address.RepoAddressDAO;
 import com.informed.ExtProject.domain.Address;
+import com.informed.ExtProject.domain.config.ServiceTestConfig;
 import com.informed.ExtProject.main.TradingApplication;
 import com.informed.ExtProject.repo.domain.AddressRepo;
 import com.informed.ExtProject.server.domain.AddressService;
@@ -17,29 +18,32 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.util.List;
 
-@SpringBootTest(classes = TradingApplication.class)
+// You should have a test configuration - it needs to be different to the main config - cos of the test database
+@SpringBootTest(classes = { ServiceTestConfig.class})
 class AddressTest {
 
     @Autowired
     private AddressService addressService;
-    @Autowired
-    private AddressController addressController;
-    private AddressTestService addressTestService = new AddressTestService();
-    @MockBean
-    AddressDAO addressDAO;
 
-    @BeforeEach
-    public void setup() {
-        addressService.setDao(addressDAO);
-    }
+    // A test fo the address server should not include the controller - thats at a higher level
+//    @Autowired
+//    private AddressController addressController;
+    private AddressTestService addressTestService = new AddressTestService();
+
+//    @MockBean
+//    AddressDAO addressDAO;
+//
+//    @BeforeEach
+//    public void setup() {
+//        addressService.setDao(addressDAO);
+//    }
 
     @Test
     public void contextLoads() {
         Address address = addressTestService.validPopulatedAddress();
         Assertions.assertThat(address).isNotNull();
-        Assertions.assertThat(addressDAO).isNotNull();
-        Assertions.assertThat(addressService).isNotNull();
-        Assertions.assertThat(addressController).isNotNull();
+//        Assertions.assertThat(addressDAO).isNotNull();
+//        Assertions.assertThat(addressService).isNotNull();
     }
 
     @Test
