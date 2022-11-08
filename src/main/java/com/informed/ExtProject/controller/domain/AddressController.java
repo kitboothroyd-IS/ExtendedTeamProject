@@ -41,6 +41,14 @@ public class AddressController {
         addressService.addAddress(address);
     }
 
+
+    @PutMapping("/addresses")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateAddress(@RequestBody Address address, HttpServletResponse response){
+        System.out.println("AddressController.updateAddress with ID " + address.getId() + "(" + address + ")");
+        addressService.updateAddress(address, response);
+    }
+
     //Currently only deleting by ID
     @DeleteMapping("/addresses")
     @ResponseStatus(HttpStatus.OK)
