@@ -31,6 +31,10 @@ public class AddressService {
         addressDAO.addAddress(address);
     }
 
+    public void updateAddress(Address address, HttpServletResponse response) {
+        addressDAO.updateAddress(address, response);
+    }
+
     public void removeAddress(Address address, HttpServletResponse response) {
         addressDAO.removeAddress(address, response);
     }

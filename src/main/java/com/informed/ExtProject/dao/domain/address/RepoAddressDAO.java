@@ -1,17 +1,11 @@
 package com.informed.ExtProject.dao.domain.address;
 
 import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.repo.domain.AddressRepo;
 import com.informed.ExtProject.exception.NotInListException;
-import org.aspectj.weaver.ast.Not;
+import com.informed.ExtProject.repo.domain.AddressRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -45,6 +39,29 @@ public class RepoAddressDAO implements AddressDAO{
     public void addAddress(Address address) {
         this.addressRepo.save(address);
     }
+
+
+    @Transactional
+    public Optional<Address> updateAddress(Address address, HttpServletResponse response) {
+        try {
+            int addressId = address.getId();
+            return this.addressRepo.findById(addressId).map(dbAddress -> {
+                dbAddress.setLine1(address.getLine1());
+                dbAddress.setLine2(address.getLine2());
+                dbAddress.setLine3(address.getLine3());
+                dbAddress.setCity(address.getCity());
+                dbAddress.setCounty(address.getCounty());
+                dbAddress.setPostcode(address.getPostcode());
+                return dbAddress;
+            });
+        } catch (NotInListException e){
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            throw new NotInListException("address");
+        }
+    }
+
+
 
     @Transactional
     public void removeAddress(Address address, HttpServletResponse response) throws NotInListException {
