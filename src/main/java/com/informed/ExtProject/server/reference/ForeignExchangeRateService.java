@@ -5,7 +5,7 @@ import com.informed.ExtProject.reference.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ForeignExchangeRatesService {
+public class ForeignExchangeRateService {
 
     private static HashMap<Currency, HashMap> exchangeRateMap = new HashMap<>();
     private static int foreignExchangeMaxIterations = 2;
@@ -17,7 +17,7 @@ public class ForeignExchangeRatesService {
     * Use recursion to call the function a second time with the inverse of the exchange rate...
     * i.e. {destinationCurrency={originCurrency=1/exchangeRate}}
     * */
-    public static void AddExchangeRate (ForeignExchangeRates foreignExchangeRate) {
+    public static void AddExchangeRate (ForeignExchangeRate foreignExchangeRate) {
         // Create an empty hashmap and put: Key=Destination currency, Value=exchange rate
         HashMap<Currency, Double> subMap = new HashMap<>();
         subMap.put(foreignExchangeRate.destinationCurrency, foreignExchangeRate.exchangeRate);
@@ -37,7 +37,7 @@ public class ForeignExchangeRatesService {
         if (foreignExchangeMaxIterations == 2) {
             foreignExchangeMaxIterations--;
             double reverseExchangeRate = 1 / foreignExchangeRate.exchangeRate;
-            ForeignExchangeRates reverseExchangeRateObj = new ForeignExchangeRates(foreignExchangeRate.destinationCurrency,
+            ForeignExchangeRate reverseExchangeRateObj = new ForeignExchangeRate(foreignExchangeRate.destinationCurrency,
                     foreignExchangeRate.originCurrency,
                     reverseExchangeRate);
             AddExchangeRate(reverseExchangeRateObj);

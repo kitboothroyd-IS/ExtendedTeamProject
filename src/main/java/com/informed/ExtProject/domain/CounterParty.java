@@ -15,7 +15,7 @@ public class CounterParty {
     private int id;
     @NotBlank
     private String name;
-    private String phoneNumber;
+    private int phoneNumber;
     private String emailAddress;
     @NotNull
     @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
@@ -26,11 +26,18 @@ public class CounterParty {
 
     }
 
-    public CounterParty(String name, String phoneNumber, String emailAddress, Address address) {
+    public CounterParty(String name, int phoneNumber, String emailAddress, Address address) {
         this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
         this.address = address;
+
+        String phoneNumberString = Integer.toString(phoneNumber);
+        if ((phoneNumberString == null || phoneNumberString.length() < 7 || phoneNumberString.length() > 15) &&
+                (emailAddress == null || emailAddress.isEmpty())) {
+            System.out.println("You must provide a valid phone number or email address.");
+        } else {
+            this.phoneNumber = phoneNumber;
+            this.emailAddress = emailAddress;
+        }
     }
 
     public int getId() {
@@ -45,11 +52,11 @@ public class CounterParty {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
