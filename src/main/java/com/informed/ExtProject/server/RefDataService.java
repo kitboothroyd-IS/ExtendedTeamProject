@@ -56,18 +56,22 @@ public class RefDataService {
     * i.e. {destinationCurrency={originCurrency=1/exchangeRate}}
     * */
     public static void AddExchangeRate (ForeignExchangeRates foreignExchangeRate) {
+        // Create an empty hashmap and put: Key=Destination currency, Value=exchange rate
+        HashMap<Currency, Double> subMap = new HashMap<>();
+        subMap.put(foreignExchangeRate.destinationCurrency, foreignExchangeRate.exchangeRate);
 
-        HashMap<Currency, Double> sub_map = new HashMap<>();
-        sub_map.put(foreignExchangeRate.destinationCurrency, foreignExchangeRate.exchangeRate);
+        // If the origin currency already exists as a key in the exchangeRateMap, get that item and put in the subMap
         if (exchangeRateMap.containsKey(foreignExchangeRate.originCurrency)) {
             exchangeRateMap.get(foreignExchangeRate.originCurrency).put(foreignExchangeRate.destinationCurrency,
                     foreignExchangeRate.exchangeRate);
+        // If the origin currency doesn't exist as a key, add it as a new item to the hashmap alongside the subMap
         } else {
-            exchangeRateMap.put(foreignExchangeRate.originCurrency, sub_map);
+            exchangeRateMap.put(foreignExchangeRate.originCurrency, subMap);
         }
         System.out.println("Added/updated exchange rate: " + foreignExchangeRate.originCurrency.getSymbol() + ">" +
                 foreignExchangeRate.destinationCurrency.getSymbol() + ": " + foreignExchangeRate.exchangeRate);
 
+        // Calculate the inverse exchange rate and re-run the function (switching the origin and destination currencies)
         if (foreignExchangeMaxIterations == 2) {
             foreignExchangeMaxIterations--;
             double reverseExchangeRate = 1 / foreignExchangeRate.exchangeRate;
