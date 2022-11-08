@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "counterParties")
-@Check(constraints = "phoneNumber IS NOT NULL OR emailAddress IS NOT NULL")
 public class CounterParty {
 
     @Id
