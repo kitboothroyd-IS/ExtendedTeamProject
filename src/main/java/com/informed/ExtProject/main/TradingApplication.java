@@ -1,7 +1,5 @@
 package com.informed.ExtProject.main;
 
-import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.server.AddressService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

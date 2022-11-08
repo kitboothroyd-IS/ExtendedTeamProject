@@ -42,4 +42,8 @@ public abstract class RefData {
     public String getSymbol() {
         return symbol;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
