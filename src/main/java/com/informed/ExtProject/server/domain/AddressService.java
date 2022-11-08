@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Component
@@ -22,7 +23,19 @@ public class AddressService {
         return addressDAO.getAllAddresses();
     }
 
+    public Address getAddressById(int id, HttpServletResponse response){
+        return addressDAO.getAddressById(id, response);
+    }
+
     public void addAddress(Address address) {
         addressDAO.addAddress(address);
+    }
+
+    public void removeAddress(Address address, HttpServletResponse response) {
+        addressDAO.removeAddress(address, response);
+    }
+
+    public void removeAddressById(int id, HttpServletResponse response) {
+        addressDAO.removeAddressById(id, response);
     }
 }
