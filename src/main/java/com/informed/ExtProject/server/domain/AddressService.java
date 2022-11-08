@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AddressService {
@@ -23,23 +24,23 @@ public class AddressService {
         return addressDAO.getAllAddresses();
     }
 
-    public Address getAddressById(int id, HttpServletResponse response){
-        return addressDAO.getAddressById(id, response);
+    public Optional<Address> getAddressById(int id){
+        return addressDAO.getAddressById(id);
     }
 
     public void addAddress(Address address) {
         addressDAO.addAddress(address);
     }
 
-    public void updateAddress(Address address, HttpServletResponse response) {
-        addressDAO.updateAddress(address, response);
+    public void updateAddress(Address address) {
+        addressDAO.updateAddress(address);
     }
 
-    public void removeAddress(Address address, HttpServletResponse response) {
-        addressDAO.removeAddress(address, response);
+    public void removeAddress(Address address) {
+        addressDAO.removeAddress(address);
     }
 
-    public void removeAddressById(int id, HttpServletResponse response) {
-        addressDAO.removeAddressById(id, response);
+    public void removeAddressById(int id) {
+        addressDAO.removeAddressById(id);
     }
 }
