@@ -3,6 +3,7 @@ package com.informed.ExtProject.reference;
 import com.informed.ExtProject.exception.NoSymbolException;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -12,9 +13,9 @@ public abstract class RefData {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
     @SequenceGenerator(name = "sequence", initialValue = 1)
     private int id;
-    @NotNull
+    @NotBlank
     private String name;
-    @NotNull
+    @NotBlank
     private String symbol;
 
     public RefData() {
