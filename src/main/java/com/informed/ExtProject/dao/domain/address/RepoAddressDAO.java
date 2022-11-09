@@ -28,8 +28,6 @@ public class RepoAddressDAO implements AddressDAO {
   public Optional<Address> getAddressById(int id) {
     return this.addressRepo.findById(id);
   }
-
-
   @Transactional
   public void addAddress(Address address) {
     this.addressRepo.save(address);

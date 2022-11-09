@@ -12,7 +12,7 @@ public class CounterPartyFactory {
     public CounterParty validPopulatedCounterParty() {
         CounterParty counterParty = new CounterParty(
                 "name",
-                0,
+                "",
                 "emailAddress",
                 validAddress
         );
@@ -22,7 +22,7 @@ public class CounterPartyFactory {
     public CounterParty validCounterPartyWithNull() {
         CounterParty counterParty = new CounterParty(
                 "name",
-                0,
+                "",
                 "emailAddress",
                 validAddress
         );
@@ -32,7 +32,7 @@ public class CounterPartyFactory {
     public CounterParty validCounterPartyWithEmpty() {
         CounterParty counterParty = new CounterParty(
                 "",
-                0,
+                "",
                 "",
                 validAddress
         );
@@ -42,7 +42,7 @@ public class CounterPartyFactory {
     public CounterParty invalidCounterPartyWithNulls() {
         CounterParty counterParty = new CounterParty(
                 null,
-                345785432,
+                "345785432",
                 null,
                 null
         );
@@ -52,7 +52,7 @@ public class CounterPartyFactory {
     public CounterParty invalidCounterPartyWithEmpties() {
         CounterParty counterParty = new CounterParty(
                 "",
-                518406222,
+                "518406222",
                 "",
                 null
         );
@@ -62,7 +62,7 @@ public class CounterPartyFactory {
     public CounterParty invalidCounterPartyNoAddress() {
         CounterParty counterParty = new CounterParty(
                 "name",
-                0,
+                "",
                 "emailAddress",
                 null
         );
