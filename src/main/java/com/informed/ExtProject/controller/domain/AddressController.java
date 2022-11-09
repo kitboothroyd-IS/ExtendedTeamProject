@@ -2,6 +2,7 @@ package com.informed.ExtProject.controller.domain;
 
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.exception.AddressCreationException;
+import com.informed.ExtProject.exception.AddressDeletionException;
 import com.informed.ExtProject.exception.AddressNotFoundException;
 import com.informed.ExtProject.server.domain.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,16 +86,29 @@ public class AddressController {
   @DeleteMapping("/addresses")
   @ResponseStatus(HttpStatus.OK)
   public void removeAddress(@RequestBody Address address, HttpServletResponse response) {
-    System.out.println("AddressController.removeAddress(" + address + ")");
-    addressService.removeAddress(address);
+    Optional<Address> optionalAddressById = addressService.getAddressById(address.getId());
+    if (optionalAddressById.isPresent()){
+      try {
+        addressService.removeAddress(address);
+        System.out.println("AddressController.removeAddress(" + address + ")");
+      } catch (IllegalArgumentException e){
+        throw new AddressDeletionException("Failed to delete address due to illegal argument");
+      }
+    } else {
+      throw new AddressNotFoundException("Failed to find address");
+    }
   }
 
   @DeleteMapping("/addresses/{id}")
   @ResponseStatus(HttpStatus.OK)
   public void removeAddressById(@PathVariable int id, HttpServletResponse response) {
-    System.out.println("AddressController.removeAddressById(" + id + ")");
-    addressService.removeAddressById(id);
-
+    Optional<Address> optionalAddress = addressService.getAddressById(id);
+    if (optionalAddress.isPresent()) {
+      addressService.removeAddressById(id);
+      System.out.println("AddressController.removeAddressById(" + id + ")");
+    } else {
+      throw new AddressNotFoundException("Failed to remove address as address with ID:" + id + "does not exist");
+    }
   }
 
   @ExceptionHandler(AddressNotFoundException.class)
