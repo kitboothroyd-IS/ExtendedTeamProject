@@ -1,5 +1,4 @@
 package com.informed.ExtProject.domain.address;
-
 import com.informed.ExtProject.controller.domain.AddressController;
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.domain.config.ServiceTestConfig;
@@ -9,19 +8,33 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.web.servlet.MockMvc;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @SpringBootTest(classes = { ServiceTestConfig.class})
+@AutoConfigureMockMvc
 public class AddressControllerTest {
 
+    @Autowired
+    ConfigurableApplicationContext applicationContext;
     @Autowired
     private AddressController addressController;
     @Autowired
     HttpServletResponse response;
+    @Autowired
+    MockMvc mockMvc;
     private AddressFactory addressFactory = new AddressFactory();
+    @BeforeEach
+    public void setup() {
+    }
 
     @Test
     public void contextLoads() {
@@ -36,20 +49,16 @@ public class AddressControllerTest {
     }
 
     @Test
-    public void addAddress() {
-        Address validPopulatedAddress = addressFactory.validAddress();
-        addressController.addAddress(validPopulatedAddress, response);
-        List<Address> addressList = addressController.getAddresses();
-        Assertions.assertThat(addressList.get(addressList.size()-1).getId()).isEqualTo(validPopulatedAddress.getId());
+    public void addAddress() throws Exception {
+        Address address = addressFactory.validAddress();
+        addressController.addAddress(address, response);
+        String urlTemplate = "/trader/addresses/list";
+        mockMvc.perform(get(urlTemplate))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("line1")));
+    }
 
-        Address invalidAddressWithNulls = addressFactory.invalidAddressWithNulls();
-        Assertions.assertThatThrownBy(() -> {
-              addressController.addAddress(invalidAddressWithNulls, response);
-          }).isInstanceOf(Exception.class);
-
-        Address invalidAddressWithEmpties = addressFactory.invalidAddressWithEmpties();
-        Assertions.assertThatThrownBy(() -> {
-            addressController.addAddress(invalidAddressWithEmpties, response);
-        }).isInstanceOf(Exception.class);
+    @Test
+    public void getAddressById() {
     }
 }

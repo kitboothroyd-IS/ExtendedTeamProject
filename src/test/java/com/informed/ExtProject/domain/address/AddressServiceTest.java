@@ -2,19 +2,19 @@ package com.informed.ExtProject.domain.address;
 
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.domain.config.ServiceTestConfig;
-import com.informed.ExtProject.exception.AddressCreationException;
 import com.informed.ExtProject.server.domain.AddressService;
 import com.informed.ExtProject.test.util.AddressFactory;
 import jdk.jfr.Description;
-import org.junit.jupiter.api.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = {ServiceTestConfig.class})
 public class AddressServiceTest {
@@ -28,18 +28,59 @@ public class AddressServiceTest {
     private AddressFactory factory;
 
 
-    @Test
-    @Description("Retrieve all addresses in a list. List should be empty.")
-    void getAllAddresses() {
-        List<Address> addresses = service.getAllAddresses();
-        assertThat(addresses.isEmpty()).isTrue();
+    @BeforeAll
+    static void setUpBeforeClass() throws Exception {
+        System.out.println("setUpBeforeClass()");
     }
 
+    @AfterAll
+    static void tearDownAfterClass() throws Exception {
+        System.out.println("tearDownAfterClass");
+    }
 
+    @BeforeEach
+    void setUp() throws Exception {
+        System.out.println("setUp");
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        System.out.println("tearDown");
+    }
+
+    @Test
+    @Description("Retrieve all addresses in a list. List should be empty.")
+    void testGetAllAddresses() {
+        Address address = factory.validAddress();
+        Address address1 = factory.validAddressNoLine2Line3();
+
+        service.addAddress(address);
+        service.addAddress(address1);
+
+        List<Address> addresses = service.getAllAddresses();
+
+        assertThat(addresses.size()).isEqualTo(2);
+        assertThat(addresses.contains(address));
+        assertThat(addresses.contains(address1));
+
+        service.removeAddress(address);
+        service.removeAddress(address1);
+    }
+
+    @Test
+    @Description("Get address by ID.")
+    void testGetAddressByIdTest() {
+        Address address = factory.validAddressWithEmpties();
+        service.addAddress(address);
+        Optional<Address> dbAddress = service.getAddressById(address.getId());
+        System.out.println("Retrieved address: " + dbAddress.get());
+        assertThat(dbAddress.get().toString()).isEqualTo(address.toString());
+        service.removeAddress(address);
+    }
 
     @Test
     @Description("Add valid address (no line2 and line3) to the service and check the added values are correct.")
-    void addValidAddress() {
+    void testAddValidAddress() {
         Address address = factory.validAddress();
         service.addAddress(address);
         List<Address> addresses = service.getAllAddresses();
@@ -55,7 +96,7 @@ public class AddressServiceTest {
 
     @Test
     @Description("Add valid address (no line2 and line3) to the service and check the added values are correct.")
-    void addValidAddressNoLine2Line3() {
+    void testAddValidAddressNoLine2Line3() {
         Address address = factory.validAddressNoLine2Line3();
         service.addAddress(address);
         List<Address> addresses = service.getAllAddresses();
@@ -71,7 +112,7 @@ public class AddressServiceTest {
 
     @Test
     @Description("Add a valid address (empty strings in line2 and line3) and check the added values are correct.")
-    void addValidAddressEmptyLine2Line3() {
+    void testAddValidAddressEmptyLine2Line3() {
         Address address = factory.validAddressWithEmpties();
         service.addAddress(address);
         List<Address> addresses = service.getAllAddresses();
@@ -87,7 +128,7 @@ public class AddressServiceTest {
 
     @Test
     @Description("Add a valid address (nulls in line2 and line3) and check the added values are correct.")
-    void addValidAddressNullLine2Line3() {
+    void testAddValidAddressNullLine2Line3() {
         Address address = factory.validAddressWithNulls();
         service.addAddress(address);
         List<Address> addresses = service.getAllAddresses();
@@ -103,24 +144,56 @@ public class AddressServiceTest {
 
     @Test
     @Description("Add an invalid address with all nulls.")
-    void addInvalidAddressAllNulls() {
+    void testAddInvalidAddressAllNulls() {
         Address address = factory.invalidAddressWithNulls();
-        AddressCreationException thrown = assertThrows(
-                AddressCreationException.class,
-                () ->  service.addAddress(address));
-        assertTrue(thrown.getMessage().contains("Address could not be created."));
+        Assertions.assertThatThrownBy(() -> {
+            service.addAddress(address);
+        }).isInstanceOf(ConstraintViolationException.class);
     }
 
     @Test
     @Description("Add an invalid address with empties.")
-    void addInvalidAddressAllEmpty() {
+    void testAddInvalidAddressAllEmpty() {
         Address address = factory.invalidAddressWithEmpties();
-        AddressCreationException thrown = assertThrows(
-                AddressCreationException.class,
-                () ->  service.addAddress(address));
-        assertTrue(thrown.getMessage().contains("Address could not be created."));
+        Assertions.assertThatThrownBy(() -> {
+                    service.addAddress(address);
+                }).isInstanceOf(ConstraintViolationException.class);
     }
-//
-//    @Test
-//    @Description()
+
+    @Test
+    @Description("Update an address.")
+    void testUpdateAddress() {
+        Address address = factory.validAddressNoLine2Line3();
+        service.addAddress(address);
+        service.getAddressById(address.getId());
+        address.setCity("updatedCity");
+        service.updateAddress(address);
+        Optional<Address> updatedAddress = service.getAddressById(address.getId());
+        System.out.println("Updated address: " + updatedAddress.get());
+        assertThat(updatedAddress.get().getCity()).isEqualTo("updatedCity");
+        service.removeAddress(updatedAddress.get());
+    }
+
+    @Test
+    @Description("Remove an address.")
+    void testRemoveAddress() {
+        Address address = factory.validAddressWithNulls();
+        service.addAddress(address);
+        service.removeAddress(address);
+        Optional<Address> dbResult = service.getAddressById(address.getId());
+        assertThat(dbResult.isEmpty());
+    }
+
+    @Test
+    @Description("Remove an address by ID.")
+    void testRemoveAddressById() {
+        Address address = factory.validAddressWithNulls();
+        service.addAddress(address);
+        service.removeAddressById(address.getId());
+        Optional<Address> dbResult = service.getAddressById(address.getId());
+        assertThat(dbResult.isEmpty());
+        List<Address> addresses = service.getAllAddresses();
+        assertThat(addresses.isEmpty());
+    }
+
 }

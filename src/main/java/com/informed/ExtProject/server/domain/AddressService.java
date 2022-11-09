@@ -31,11 +31,7 @@ public class AddressService {
     }
 
     public void addAddress(Address address) {
-        try {
-            addressDAO.addAddress(address);
-        } catch (ConstraintViolationException e) {
-        throw new AddressCreationException("Address could not be created.");
-        }
+        addressDAO.addAddress(address);
     }
 
     public void updateAddress(Address address) {
