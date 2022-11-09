@@ -7,11 +7,7 @@ import com.informed.ExtProject.test.util.AddressFactory;
 public class CounterPartyFactory {
 
     private AddressFactory addressFactory = new AddressFactory();
-    private Address validAddress = addressFactory.validPopulatedAddress();
-
-    public CounterPartyFactory() {
-
-    }
+    Address validAddress = addressFactory.validPopulatedAddress();
 
     public CounterParty validPopulatedCounterParty() {
         CounterParty counterParty = new CounterParty(
@@ -72,6 +68,4 @@ public class CounterPartyFactory {
         );
         return counterParty;
     }
-
-
 }

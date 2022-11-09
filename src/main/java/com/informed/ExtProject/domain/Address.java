@@ -28,6 +28,10 @@ public class Address {
 
     }
 
+    public Address(String line1, String city, String county, String postcode) {
+        this(line1, "", "", city, county, postcode);
+    }
+
     public Address(String line1, String line2, String line3, String city, String county, String postcode) {
         this.line1 = line1;
         this.line2 = line2;

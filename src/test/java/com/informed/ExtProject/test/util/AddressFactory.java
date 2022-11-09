@@ -1,7 +1,8 @@
 package com.informed.ExtProject.test.util;
-
 import com.informed.ExtProject.domain.Address;
-
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+@Component
 public class AddressFactory {
 
     public AddressFactory(){
@@ -13,6 +14,16 @@ public class AddressFactory {
                 "line1",
                 "line2",
                 "line3",
+                "city",
+                "county",
+                "postcode"
+        );
+        return address;
+    }
+
+    public Address validAddressNoLine2Line3() {
+        Address address = new Address(
+                "line1",
                 "city",
                 "county",
                 "postcode"
