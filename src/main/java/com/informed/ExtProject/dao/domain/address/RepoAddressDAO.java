@@ -38,7 +38,9 @@ public class RepoAddressDAO implements AddressDAO {
 
   @Transactional
   public void addAddress(Address address) {
+
     this.addressRepo.save(address);
+    System.out.println("Added address: " + address);
   }
 
 
@@ -53,11 +55,11 @@ public class RepoAddressDAO implements AddressDAO {
       dbAddress.setCounty(address.getCounty());
       dbAddress.setPostcode(address.getPostcode());
       return dbAddress;
-    });
-  }
+});
+        }
 
 
-  @Transactional
+@Transactional
   public void removeAddress(Address address) throws NotInListException {
     try {
       this.addressRepo.delete(address);

@@ -3,6 +3,7 @@ package com.informed.ExtProject.domain;
 import com.informed.ExtProject.reference.Equity;
 import com.informed.ExtProject.reference.Currency;
 import com.informed.ExtProject.reference.Exchange;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -25,6 +26,7 @@ public class EquityTrade {
     @JoinColumn(name="counterParty2Id", nullable = false)
     private CounterParty counterParty2;
     @NotNull
+    @DateTimeFormat
     private Date agreementDate;
     @NotNull
     @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
