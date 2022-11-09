@@ -24,26 +24,12 @@ class AddressTest {
 
     @Autowired
     private AddressService addressService;
-
-    // A test fo the address server should not include the controller - thats at a higher level
-//    @Autowired
-//    private AddressController addressController;
     private AddressTestService addressTestService = new AddressTestService();
-
-//    @MockBean
-//    AddressDAO addressDAO;
-//
-//    @BeforeEach
-//    public void setup() {
-//        addressService.setDao(addressDAO);
-//    }
 
     @Test
     public void contextLoads() {
         Address address = addressTestService.validPopulatedAddress();
         Assertions.assertThat(address).isNotNull();
-//        Assertions.assertThat(addressDAO).isNotNull();
-//        Assertions.assertThat(addressService).isNotNull();
     }
 
     @Test
