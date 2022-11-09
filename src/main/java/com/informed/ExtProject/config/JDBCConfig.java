@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
+@PropertySource("classpath:jdbc.properties")
 @ComponentScan(basePackages = {"com.informed.ExtProject.dao"})
 @EntityScan(basePackages = {"com.informed.ExtProject.domain", "com.informed.ExtProject.reference"})
 @EnableJpaRepositories(basePackages = {"com.informed.ExtProject.repo"})
