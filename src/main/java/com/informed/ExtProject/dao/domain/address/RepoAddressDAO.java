@@ -26,12 +26,6 @@ public class RepoAddressDAO implements AddressDAO {
   }
 
   public Optional<Address> getAddressById(int id) {
-//        List<Address> addresses = getAllAddresses();
-//        Address result = addresses.stream()
-//          .filter(a -> a.getId() == id)
-//          .findFirst()
-//          .orElseThrow(RuntimeException::new);
-
     return this.addressRepo.findById(id);
   }
 
