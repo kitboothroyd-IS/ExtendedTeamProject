@@ -4,6 +4,7 @@ import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.exception.AddressCreationException;
 import com.informed.ExtProject.exception.AddressNotFoundException;
 import com.informed.ExtProject.server.domain.AddressService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -49,17 +50,13 @@ public class AddressController {
 
   }
 
-//        System.out.println("AddressController.getId()");
-//        return addressService.getAddressById(id);
-
 
   @PostMapping("/addresses")
   @ResponseStatus(HttpStatus.CREATED)
   public void addAddress(@RequestBody Address address, HttpServletResponse response) {
-    if (address != null) {
+    try {
       addressService.addAddress(address);
-      //            System.out.println("AddressController.addAddress(" + address + ")");
-    } else {
+    } catch (AddressCreationException e) {
       throw new AddressCreationException("Failed to create an address");
     }
   }

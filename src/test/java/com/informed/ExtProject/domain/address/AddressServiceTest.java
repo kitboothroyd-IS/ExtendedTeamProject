@@ -29,15 +29,18 @@ public class AddressServiceTest {
 
 
     @Test
+    @Description("Retrieve all addresses in a list. List should be empty.")
     void getAllAddresses() {
         List<Address> addresses = service.getAllAddresses();
         assertThat(addresses.isEmpty()).isTrue();
     }
 
+
+
     @Test
     @Description("Add valid address (no line2 and line3) to the service and check the added values are correct.")
-    void addAndCheckAddress() {
-        Address address = factory.validPopulatedAddress();
+    void addValidAddress() {
+        Address address = factory.validAddress();
         service.addAddress(address);
         List<Address> addresses = service.getAllAddresses();
         assertThat(addresses)
@@ -52,7 +55,7 @@ public class AddressServiceTest {
 
     @Test
     @Description("Add valid address (no line2 and line3) to the service and check the added values are correct.")
-    void addAndCheckAddressNoLine2Line3() {
+    void addValidAddressNoLine2Line3() {
         Address address = factory.validAddressNoLine2Line3();
         service.addAddress(address);
         List<Address> addresses = service.getAllAddresses();
@@ -68,7 +71,7 @@ public class AddressServiceTest {
 
     @Test
     @Description("Add a valid address (empty strings in line2 and line3) and check the added values are correct.")
-    void addAndCheckAddressEmptyLine2Line3() {
+    void addValidAddressEmptyLine2Line3() {
         Address address = factory.validAddressWithEmpties();
         service.addAddress(address);
         List<Address> addresses = service.getAllAddresses();
@@ -84,7 +87,7 @@ public class AddressServiceTest {
 
     @Test
     @Description("Add a valid address (nulls in line2 and line3) and check the added values are correct.")
-    void addAndCheckAddressNullLine2Line3() {
+    void addValidAddressNullLine2Line3() {
         Address address = factory.validAddressWithNulls();
         service.addAddress(address);
         List<Address> addresses = service.getAllAddresses();
@@ -100,21 +103,24 @@ public class AddressServiceTest {
 
     @Test
     @Description("Add an invalid address with all nulls.")
-    void invalidAddressWithNulls() {
-        Address address = new Address(null, null, null, null, null, null);
+    void addInvalidAddressAllNulls() {
+        Address address = factory.invalidAddressWithNulls();
         AddressCreationException thrown = assertThrows(
                 AddressCreationException.class,
                 () ->  service.addAddress(address));
-        assertTrue(thrown.getMessage().contains("Handling"));
+        assertTrue(thrown.getMessage().contains("Address could not be created."));
     }
 
     @Test
     @Description("Add an invalid address with empties.")
-    void invalidAddressWithEmpties() {
-        Address address = new Address("", "", "", "", "", "");
+    void addInvalidAddressAllEmpty() {
+        Address address = factory.invalidAddressWithEmpties();
         AddressCreationException thrown = assertThrows(
                 AddressCreationException.class,
                 () ->  service.addAddress(address));
-        assertTrue(thrown.getMessage().contains("Handling"));
+        assertTrue(thrown.getMessage().contains("Address could not be created."));
     }
+//
+//    @Test
+//    @Description()
 }

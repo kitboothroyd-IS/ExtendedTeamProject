@@ -1,7 +1,7 @@
 package com.informed.ExtProject.test.util;
 import com.informed.ExtProject.domain.Address;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+
 @Component
 public class AddressFactory {
 
@@ -9,7 +9,7 @@ public class AddressFactory {
 
     }
 
-    public Address validPopulatedAddress() {
+    public Address validAddress() {
         Address address = new Address(
                 "line1",
                 "line2",
@@ -79,3 +79,4 @@ public class AddressFactory {
         return address;
     }
 }
+

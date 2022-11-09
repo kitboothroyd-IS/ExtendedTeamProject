@@ -2,11 +2,13 @@ package com.informed.ExtProject.server.domain;
 
 import com.informed.ExtProject.dao.domain.address.AddressDAO;
 import com.informed.ExtProject.domain.Address;
+import com.informed.ExtProject.exception.AddressCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +31,11 @@ public class AddressService {
     }
 
     public void addAddress(Address address) {
-        addressDAO.addAddress(address);
+        try {
+            addressDAO.addAddress(address);
+        } catch (ConstraintViolationException e) {
+        throw new AddressCreationException("Address could not be created.");
+        }
     }
 
     public void updateAddress(Address address) {
