@@ -37,7 +37,7 @@ public class AddressControllerTest {
 
     @Test
     public void addAddress() {
-        Address validPopulatedAddress = addressFactory.validPopulatedAddress();
+        Address validPopulatedAddress = addressFactory.validAddress();
         addressController.addAddress(validPopulatedAddress, response);
         List<Address> addressList = addressController.getAddresses();
         Assertions.assertThat(addressList.get(addressList.size()-1).getId()).isEqualTo(validPopulatedAddress.getId());
