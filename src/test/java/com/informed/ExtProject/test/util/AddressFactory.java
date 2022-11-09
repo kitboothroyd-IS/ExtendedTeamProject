@@ -2,7 +2,6 @@ package com.informed.ExtProject.test.util;
 import com.informed.ExtProject.domain.Address;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-
 @Component
 public class AddressFactory {
 

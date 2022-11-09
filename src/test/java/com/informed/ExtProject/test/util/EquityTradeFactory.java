@@ -1,8 +1,8 @@
-package com.informed.ExtProject.domain.equityTrade;
+package com.informed.ExtProject.test.util;
 
 import com.informed.ExtProject.domain.CounterParty;
 import com.informed.ExtProject.domain.EquityTrade;
-import com.informed.ExtProject.domain.counterParty.CounterPartyTestService;
+import com.informed.ExtProject.test.util.CounterPartyFactory;
 import com.informed.ExtProject.reference.Currency;
 import com.informed.ExtProject.reference.Equity;
 import com.informed.ExtProject.reference.Exchange;
@@ -10,19 +10,19 @@ import com.informed.ExtProject.reference.RefDataTestService;
 
 import java.util.Date;
 
-public class EquityTradeTestService {
+public class EquityTradeFactory {
 
-    private CounterPartyTestService counterPartyTestService;
+    private CounterPartyFactory counterPartyFactory;
     private RefDataTestService refDataTestService;
 
-    private CounterParty counterParty1 = counterPartyTestService.validCounterPartyWithEmpty();
-    private CounterParty counterParty2 = counterPartyTestService.validCounterPartyWithNull();
+    private CounterParty counterParty1 = counterPartyFactory.validCounterPartyWithEmpty();
+    private CounterParty counterParty2 = counterPartyFactory.validCounterPartyWithNull();
     private Date agreementDate = new Date();
     private Equity equity = refDataTestService.validEquity();
     private Currency currency = refDataTestService.validCurrency();
     private Exchange exchange = refDataTestService.validExchange();
 
-    public EquityTradeTestService() {
+    public EquityTradeFactory() {
 
     }
 

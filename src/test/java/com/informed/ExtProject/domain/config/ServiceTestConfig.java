@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {
   "com.informed.ExtProject.server",
   "com.informed.ExtProject.dao",
+        "com.informed.ExtProject.controller",
   "com.informed.ExtProject.test.util"})
 @EntityScan(basePackages =
   {"com.informed.ExtProject.domain",

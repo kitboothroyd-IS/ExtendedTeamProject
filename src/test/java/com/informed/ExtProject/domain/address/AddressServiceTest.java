@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = {ServiceTestConfig.class})
-public class AdressServiceTest {
+public class AddressServiceTest {
 
-    public AdressServiceTest() {
+    public AddressServiceTest() {
 
     }
     @Autowired

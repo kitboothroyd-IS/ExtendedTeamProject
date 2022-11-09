@@ -1,25 +1,15 @@
-package com.informed.ExtProject.domain.counterParty;
+package com.informed.ExtProject.test.util;
 
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.domain.CounterParty;
-import com.informed.ExtProject.server.domain.AddressService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.informed.ExtProject.test.util.AddressFactory;
 
-public class CounterPartyTestService {
-    @Autowired
-    private AddressService addressService;
-    @Autowired
-    private Address address;
+public class CounterPartyFactory {
 
-    private Address validAddress = new Address("10 High St", "Wellington", "Greater Wellington", "6011");
-
-    public CounterPartyTestService() {
-
-    }
+    private AddressFactory addressFactory = new AddressFactory();
+    Address validAddress = addressFactory.validPopulatedAddress();
 
     public CounterParty validPopulatedCounterParty() {
-        addressService.addAddress(validAddress);
-
         CounterParty counterParty = new CounterParty(
                 "name",
                 0,
@@ -78,6 +68,4 @@ public class CounterPartyTestService {
         );
         return counterParty;
     }
-
-
 }
