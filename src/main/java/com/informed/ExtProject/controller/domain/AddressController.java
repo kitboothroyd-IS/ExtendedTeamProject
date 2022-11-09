@@ -1,15 +1,17 @@
 package com.informed.ExtProject.controller.domain;
 
 import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.exception.AddressCreationException;
+import com.informed.ExtProject.exception.InvalidAddressException;
 import com.informed.ExtProject.exception.AddressNotFoundException;
+import com.informed.ExtProject.exception.NotInListException;
 import com.informed.ExtProject.server.domain.AddressService;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.TransactionRequiredException;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,27 +42,20 @@ public class AddressController {
   @GetMapping("/addresses/{id}")
   @ResponseStatus(HttpStatus.OK)
   public Address getAddressById(@PathVariable int id, HttpServletResponse response) {
-    Optional<Address> result = addressService.getAddressById(id);
-    if (result.isPresent()) {
-      return result.get();
-    } else {
-      throw new AddressNotFoundException("Could not find address with ID" + result);
+    try {
+      return addressService.getAddressById(id).get();
+    } catch (NotInListException e) {
+      throw new AddressNotFoundException("The address you have tried to get does not exist in the address list.");
     }
-
   }
-
-//        System.out.println("AddressController.getId()");
-//        return addressService.getAddressById(id);
-
 
   @PostMapping("/addresses")
   @ResponseStatus(HttpStatus.CREATED)
   public void addAddress(@RequestBody Address address, HttpServletResponse response) {
-    if (address != null) {
+    try {
       addressService.addAddress(address);
-      //            System.out.println("AddressController.addAddress(" + address + ")");
-    } else {
-      throw new AddressCreationException("Failed to create an address");
+    } catch (ConstraintViolationException e) {
+      throw new InvalidAddressException("Not a valid address.");
     }
   }
 
@@ -74,7 +69,7 @@ public class AddressController {
         System.out.println("AddressController.updateAddress with ID " + address.getId() + "(" + address + ")");
         addressService.updateAddress(address);
       } catch (IllegalArgumentException e) {
-        throw new AddressCreationException("Failed to update address due to illegal argument.");
+        throw new InvalidAddressException("Failed to update address due to illegal argument.");
       }
     } else {
       throw new AddressNotFoundException("Failed to find address with ID " + address.getId());
@@ -86,7 +81,11 @@ public class AddressController {
   @ResponseStatus(HttpStatus.OK)
   public void removeAddress(@RequestBody Address address, HttpServletResponse response) {
     System.out.println("AddressController.removeAddress(" + address + ")");
-    addressService.removeAddress(address);
+    try {
+      addressService.removeAddress(address);
+    } catch (NotInListException e) {
+      throw new AddressNotFoundException("Attempted to delete an address not in the list of addresses.");
+    }
   }
 
   @DeleteMapping("/addresses/{id}")
@@ -105,7 +104,7 @@ public class AddressController {
     System.out.println("Handling error for address.");
   }
 
-  @ExceptionHandler(AddressCreationException.class)
+  @ExceptionHandler(InvalidAddressException.class)
   @ResponseStatus(
     value = HttpStatus.NOT_IMPLEMENTED,
     reason = "Cannot create/update this address")

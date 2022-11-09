@@ -26,15 +26,13 @@ public class RepoAddressDAO implements AddressDAO {
   }
 
   public Optional<Address> getAddressById(int id) {
-//        List<Address> addresses = getAllAddresses();
-//        Address result = addresses.stream()
-//          .filter(a -> a.getId() == id)
-//          .findFirst()
-//          .orElseThrow(RuntimeException::new);
-
-    return this.addressRepo.findById(id);
+    if (this.addressRepo.existsById(id)) {
+      System.out.println("Deleted address with id: " + id);
+      return this.addressRepo.findById(id);
+    } else {
+      throw new NotInListException("address");
+    }
   }
-
 
   @Transactional
   public void addAddress(Address address) {
@@ -61,11 +59,10 @@ public class RepoAddressDAO implements AddressDAO {
 
 @Transactional
   public void removeAddress(Address address) throws NotInListException {
-    try {
+    if (this.addressRepo.existsById(address.getId())) {
       this.addressRepo.delete(address);
       System.out.println("Delete address with: " + address);
-    } catch (NotInListException e) {
-      e.printStackTrace();
+    } else {
       throw new NotInListException("address");
     }
   }
@@ -73,13 +70,11 @@ public class RepoAddressDAO implements AddressDAO {
 
   @Transactional
   public void removeAddressById(int id) {
-    Optional<Address> optionalAddress = this.addressRepo.findById(id);
-    if (optionalAddress.isPresent()) {
-      System.out.println("Hello");
+    if (this.addressRepo.existsById(id)) {
       this.addressRepo.deleteById(id);
       System.out.println("Deleted address with id: " + id);
     } else {
-      System.out.println("Goodbye");
+      throw new NotInListException("address");
     }
   }
 

@@ -2,7 +2,7 @@ package com.informed.ExtProject.domain.address;
 
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.domain.config.ServiceTestConfig;
-import com.informed.ExtProject.exception.AddressCreationException;
+import com.informed.ExtProject.exception.InvalidAddressException;
 import com.informed.ExtProject.server.domain.AddressService;
 import com.informed.ExtProject.test.util.AddressFactory;
 import jdk.jfr.Description;
@@ -102,8 +102,8 @@ public class AddressServiceTest {
     @Description("Add an invalid address with all nulls.")
     void invalidAddressWithNulls() {
         Address address = new Address(null, null, null, null, null, null);
-        AddressCreationException thrown = assertThrows(
-                AddressCreationException.class,
+        InvalidAddressException thrown = assertThrows(
+                InvalidAddressException.class,
                 () ->  service.addAddress(address));
         assertTrue(thrown.getMessage().contains("Handling"));
     }
@@ -112,8 +112,8 @@ public class AddressServiceTest {
     @Description("Add an invalid address with empties.")
     void invalidAddressWithEmpties() {
         Address address = new Address("", "", "", "", "", "");
-        AddressCreationException thrown = assertThrows(
-                AddressCreationException.class,
+        InvalidAddressException thrown = assertThrows(
+                InvalidAddressException.class,
                 () ->  service.addAddress(address));
         assertTrue(thrown.getMessage().contains("Handling"));
     }
