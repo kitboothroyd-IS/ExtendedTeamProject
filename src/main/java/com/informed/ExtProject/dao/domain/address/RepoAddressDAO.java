@@ -38,7 +38,6 @@ public class RepoAddressDAO implements AddressDAO {
 
   @Transactional
   public void addAddress(Address address) {
-
     this.addressRepo.save(address);
     System.out.println("Added address: " + address);
   }
@@ -55,33 +54,20 @@ public class RepoAddressDAO implements AddressDAO {
       dbAddress.setCounty(address.getCounty());
       dbAddress.setPostcode(address.getPostcode());
       return dbAddress;
-});
-        }
+    });
+  }
 
 
-@Transactional
-  public void removeAddress(Address address) throws NotInListException {
-    try {
-      this.addressRepo.delete(address);
-      System.out.println("Delete address with: " + address);
-    } catch (NotInListException e) {
-      e.printStackTrace();
-      throw new NotInListException("address");
-    }
+  @Transactional
+  public void removeAddress(Address address) {
+    this.addressRepo.delete(address);
+    System.out.println("Deleted address with: " + address);
   }
 
 
   @Transactional
   public void removeAddressById(int id) {
-    Optional<Address> optionalAddress = this.addressRepo.findById(id);
-    if (optionalAddress.isPresent()) {
-      System.out.println("Hello");
-      this.addressRepo.deleteById(id);
-      System.out.println("Deleted address with id: " + id);
-    } else {
-      System.out.println("Goodbye");
-    }
+    this.addressRepo.deleteById(id);
+    System.out.println("Deleted address with ID: " + id);
   }
-
-
 }
