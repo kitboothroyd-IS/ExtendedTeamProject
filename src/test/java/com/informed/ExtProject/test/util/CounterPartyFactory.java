@@ -1,15 +1,15 @@
-package com.informed.ExtProject.domain.counterParty;
+package com.informed.ExtProject.test.util;
 
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.domain.CounterParty;
-import com.informed.ExtProject.domain.address.AddressTestService;
+import com.informed.ExtProject.test.util.AddressFactory;
 
-public class CounterPartyTestService {
+public class CounterPartyFactory {
 
-    private AddressTestService addressTestService;
-    private Address validAddress = addressTestService.validPopulatedAddress();
+    private AddressFactory addressFactory = new AddressFactory();
+    private Address validAddress = addressFactory.validPopulatedAddress();
 
-    public CounterPartyTestService() {
+    public CounterPartyFactory() {
 
     }
 

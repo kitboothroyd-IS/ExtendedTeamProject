@@ -1,10 +1,10 @@
-package com.informed.ExtProject.domain.address;
+package com.informed.ExtProject.test.util;
 
 import com.informed.ExtProject.domain.Address;
 
-public class AddressTestService {
+public class AddressFactory {
 
-    public AddressTestService(){
+    public AddressFactory(){
 
     }
 
