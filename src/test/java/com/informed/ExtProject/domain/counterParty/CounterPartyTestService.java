@@ -16,7 +16,7 @@ public class CounterPartyTestService {
     public CounterParty validPopulatedCounterParty() {
         CounterParty counterParty = new CounterParty(
                 "name",
-                "phoneNumber",
+                0,
                 "emailAddress",
                 validAddress
         );
@@ -26,7 +26,7 @@ public class CounterPartyTestService {
     public CounterParty validCounterPartyWithNull() {
         CounterParty counterParty = new CounterParty(
                 "name",
-                null,
+                0,
                 "emailAddress",
                 validAddress
         );
@@ -36,8 +36,8 @@ public class CounterPartyTestService {
     public CounterParty validCounterPartyWithEmpty() {
         CounterParty counterParty = new CounterParty(
                 "",
-                "phoneNumber",
-                "emailAddress",
+                0,
+                "",
                 validAddress
         );
         return counterParty;
@@ -46,7 +46,7 @@ public class CounterPartyTestService {
     public CounterParty invalidCounterPartyWithNulls() {
         CounterParty counterParty = new CounterParty(
                 null,
-                null,
+                345785432,
                 null,
                 null
         );
@@ -56,7 +56,7 @@ public class CounterPartyTestService {
     public CounterParty invalidCounterPartyWithEmpties() {
         CounterParty counterParty = new CounterParty(
                 "",
-                "",
+                518406222,
                 "",
                 null
         );
@@ -66,7 +66,7 @@ public class CounterPartyTestService {
     public CounterParty invalidCounterPartyNoAddress() {
         CounterParty counterParty = new CounterParty(
                 "name",
-                "phoneNumber",
+                0,
                 "emailAddress",
                 null
         );
