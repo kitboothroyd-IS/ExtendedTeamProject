@@ -2,7 +2,7 @@ package com.informed.ExtProject.domain.address;
 import com.informed.ExtProject.controller.domain.AddressController;
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.domain.config.ServiceTestConfig;
-import com.informed.ExtProject.exception.AddressNotFoundException;
+import com.informed.ExtProject.exception.ObjectNotFoundException;
 import com.informed.ExtProject.test.util.AddressFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,11 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.web.servlet.MockMvc;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -45,7 +44,7 @@ public class AddressControllerTest {
     public void getAddresses(){
         Assertions.assertThatThrownBy(() -> {
             addressController.getAddresses();
-        }).isInstanceOf(AddressNotFoundException.class);
+        }).isInstanceOf(ObjectNotFoundException.class);
     }
 
     @Test

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CounterPartyService {
@@ -22,7 +23,23 @@ public class CounterPartyService {
         return counterPartyDAO.getAllCounterParties();
     }
 
+    public Optional<CounterParty> getCounterPartyById(int id) {
+        return counterPartyDAO.getCounterPartyById(id);
+    }
+
     public void addCounterParty(CounterParty counterParty) {
         counterPartyDAO.addCounterParty(counterParty);
+    }
+
+    public Optional<CounterParty> updateCounterParty(CounterParty counterParty) {
+        return counterPartyDAO.updateCounterParty(counterParty);
+    }
+
+    public void removeCounterParty(CounterParty counterParty) {
+        counterPartyDAO.removeCounterParty(counterParty);
+    }
+
+    public void removeCounterPartyById(int id) {
+        counterPartyDAO.removeCounterPartyById(id);
     }
 }

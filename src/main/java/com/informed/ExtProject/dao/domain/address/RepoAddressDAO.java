@@ -1,7 +1,6 @@
 package com.informed.ExtProject.dao.domain.address;
 
 import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.exception.NotInListException;
 import com.informed.ExtProject.repo.domain.AddressRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,8 +27,6 @@ public class RepoAddressDAO implements AddressDAO {
   public Optional<Address> getAddressById(int id) {
     return this.addressRepo.findById(id);
   }
-
-
   @Transactional
   public void addAddress(Address address) {
     this.addressRepo.save(address);

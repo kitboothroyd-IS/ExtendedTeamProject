@@ -1,7 +1,5 @@
 package com.informed.ExtProject.domain;
 
-import org.hibernate.annotations.Check;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,25 +13,24 @@ public class CounterParty {
     private int id;
     @NotBlank
     private String name;
-    private int phoneNumber;
+    private String phoneNumber;
     private String emailAddress;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="addressId", nullable = false)
     private Address address;
 
     public CounterParty() {
 
     }
-
-    public CounterParty(String name, int phoneNumber, String emailAddress, Address address) {
+    public CounterParty(String name, String phoneNumber, String emailAddress, Address address) {
         this.name = name;
         this.address = address;
 
-        String phoneNumberString = Integer.toString(phoneNumber);
-        if ((phoneNumberString == null || phoneNumberString.length() < 7 || phoneNumberString.length() > 15) &&
+        // Check that at least the phone number or the email address are valid
+        if ((phoneNumber == null || phoneNumber.length() < 7 || phoneNumber.length() > 15) &&
                 (emailAddress == null || emailAddress.isEmpty())) {
-            System.out.println("You must provide a valid phone number or email address.");
+            throw new IllegalArgumentException("You must provide a valid phone number or email address.");
         } else {
             this.phoneNumber = phoneNumber;
             this.emailAddress = emailAddress;
@@ -52,11 +49,11 @@ public class CounterParty {
         this.name = name;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -74,5 +71,15 @@ public class CounterParty {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String toString() {
+        return "CounterParty{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", address=" + address +
+                '}';
     }
 }
