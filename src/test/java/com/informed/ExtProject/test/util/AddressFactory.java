@@ -1,5 +1,6 @@
 package com.informed.ExtProject.test.util;
 import com.informed.ExtProject.domain.Address;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

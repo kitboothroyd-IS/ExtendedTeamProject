@@ -52,5 +52,10 @@ public class RepoCounterPartyDAO implements CounterPartyDAO {
         System.out.println("Deleted counter party: " + counterParty);
     }
 
+    @Transactional
+    public void removeCounterPartyById(int id) {
+        this.counterPartyRepo.deleteById(id);
+        System.out.println("Deleted Counter Party with ID: " + id);
+    }
 
 }

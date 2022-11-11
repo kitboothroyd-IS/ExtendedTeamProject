@@ -3,13 +3,35 @@ package com.informed.ExtProject.test.util;
 import com.informed.ExtProject.domain.Address;
 import com.informed.ExtProject.domain.CounterParty;
 import com.informed.ExtProject.test.util.AddressFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CounterPartyFactory {
 
     private AddressFactory addressFactory = new AddressFactory();
     Address validAddress = addressFactory.validAddress();
 
-    public CounterParty validPopulatedCounterParty() {
+    public CounterParty validCounterParty() {
+        CounterParty counterParty = new CounterParty(
+                "name",
+                "123456789",
+                "emailAddress",
+                validAddress
+        );
+        return counterParty;
+    }
+
+    public CounterParty validCounterPartyNullPhone() {
+        CounterParty counterParty = new CounterParty(
+                "name",
+                null,
+                "emailAddress",
+                validAddress
+        );
+        return counterParty;
+    }
+
+    public CounterParty validCounterPartyEmptyPhone() {
         CounterParty counterParty = new CounterParty(
                 "name",
                 "",
@@ -19,21 +41,51 @@ public class CounterPartyFactory {
         return counterParty;
     }
 
-    public CounterParty validCounterPartyWithNull() {
+    public CounterParty validCounterPartyNullEmail() {
         CounterParty counterParty = new CounterParty(
                 "name",
-                "",
-                "emailAddress",
+                "123456789",
+                null,
                 validAddress
         );
         return counterParty;
     }
 
-    public CounterParty validCounterPartyWithEmpty() {
+    public CounterParty validCounterPartyEmptyEmail() {
         CounterParty counterParty = new CounterParty(
+                "name",
+                "123456789",
+                "",
+                validAddress
+        );
+        return counterParty;
+    }
+
+    public CounterParty invalidCounterPartyEmptyPhoneEmail() {
+        CounterParty counterParty = new CounterParty(
+                "name",
                 "",
                 "",
-                "",
+                validAddress
+        );
+        return counterParty;
+    }
+
+    public CounterParty invalidCounterPartyNullPhoneEmail() {
+        CounterParty counterParty = new CounterParty(
+                "name",
+                null,
+                null,
+                validAddress
+        );
+        return counterParty;
+    }
+
+    public CounterParty invalidCounterPartyInvalidPhone() {
+        CounterParty counterParty = new CounterParty(
+                "name",
+                "12345",
+                null,
                 validAddress
         );
         return counterParty;

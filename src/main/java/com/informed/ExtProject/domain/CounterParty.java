@@ -1,7 +1,5 @@
 package com.informed.ExtProject.domain;
 
-import org.hibernate.annotations.Check;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,7 +16,7 @@ public class CounterParty {
     private String phoneNumber;
     private String emailAddress;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="addressId", nullable = false)
     private Address address;
 
@@ -29,7 +27,7 @@ public class CounterParty {
         this.name = name;
         this.address = address;
 
-//        String phoneNumberString = Integer.toString(phoneNumber);
+        // Check that at least the phone number or the email address are valid
         if ((phoneNumber == null || phoneNumber.length() < 7 || phoneNumber.length() > 15) &&
                 (emailAddress == null || emailAddress.isEmpty())) {
             throw new IllegalArgumentException("You must provide a valid phone number or email address.");
@@ -73,5 +71,15 @@ public class CounterParty {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String toString() {
+        return "CounterParty{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", address=" + address +
+                '}';
     }
 }

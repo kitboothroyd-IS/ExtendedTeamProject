@@ -15,8 +15,8 @@ public class EquityTradeFactory {
     private CounterPartyFactory counterPartyFactory;
     private RefDataTestService refDataTestService;
 
-    private CounterParty counterParty1 = counterPartyFactory.validCounterPartyWithEmpty();
-    private CounterParty counterParty2 = counterPartyFactory.validCounterPartyWithNull();
+    private CounterParty counterParty1 = counterPartyFactory.validCounterPartyEmptyPhone();
+    private CounterParty counterParty2 = counterPartyFactory.validCounterPartyNullPhone();
     private Date agreementDate = new Date();
     private Equity equity = refDataTestService.validEquity();
     private Currency currency = refDataTestService.validCurrency();

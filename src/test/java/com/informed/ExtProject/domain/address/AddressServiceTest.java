@@ -19,9 +19,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = {ServiceTestConfig.class})
 public class AddressServiceTest {
 
-    public AddressServiceTest() {
+    public AddressServiceTest() { }
 
-    }
     @Autowired
     private AddressService service;
     @Autowired
@@ -49,7 +48,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    @Description("Retrieve all addresses in a list. List should be empty.")
+    @Description("Retrieve all addresses as a list. Check list is of right size.")
     void testGetAllAddresses() {
         Address address = factory.validAddress();
         Address address1 = factory.validAddressNoLine2Line3();

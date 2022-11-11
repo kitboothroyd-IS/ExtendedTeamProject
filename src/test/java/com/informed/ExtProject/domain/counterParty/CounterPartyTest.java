@@ -18,7 +18,7 @@ public class CounterPartyTest {
 
     @Test
     public void contextLoads() {
-        CounterParty counterParty = counterPartyFactory.validPopulatedCounterParty();
+        CounterParty counterParty = counterPartyFactory.validCounterParty();
         Assertions.assertThat(counterParty).isNotNull();
     }
 }

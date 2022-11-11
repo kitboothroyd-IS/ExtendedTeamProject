@@ -1,16 +1,14 @@
 package com.informed.ExtProject.controller.domain;
 
 import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.exception.AddressCreationException;
-import com.informed.ExtProject.exception.AddressDeletionException;
-import com.informed.ExtProject.exception.AddressNotFoundException;
+import com.informed.ExtProject.exception.FailedCreationException;
+import com.informed.ExtProject.exception.FailedDeletionException;
+import com.informed.ExtProject.exception.ObjectNotFoundException;
 import com.informed.ExtProject.server.domain.AddressService;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.TransactionRequiredException;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +29,7 @@ public class AddressController {
   public List<Address> getAddresses() {
     List<Address> result = addressService.getAllAddresses();
     if (result.isEmpty()) {
-      throw new AddressNotFoundException("Could not find any addresses");
+      throw new ObjectNotFoundException("Could not find any addresses");
     } else {
       System.out.println("AddressController.getAddresses()");
       return result;
@@ -46,9 +44,8 @@ public class AddressController {
     if (result.isPresent()) {
       return result.get();
     } else {
-      throw new AddressNotFoundException("Could not find address with ID" + result);
+      throw new ObjectNotFoundException("Could not find address with ID" + result);
     }
-
   }
 
 
@@ -57,8 +54,8 @@ public class AddressController {
   public void addAddress(@RequestBody Address address, HttpServletResponse response) {
     try {
       addressService.addAddress(address);
-    } catch (AddressCreationException e) {
-      throw new AddressCreationException("Failed to create an address");
+    } catch (FailedCreationException e) {
+      throw new FailedCreationException("Failed to create an address");
     }
   }
 
@@ -72,10 +69,10 @@ public class AddressController {
         System.out.println("AddressController.updateAddress with ID " + address.getId() + "(" + address + ")");
         addressService.updateAddress(address);
       } catch (IllegalArgumentException e) {
-        throw new AddressCreationException("Failed to update address due to illegal argument.");
+        throw new FailedCreationException("Failed to update address due to illegal argument.");
       }
     } else {
-      throw new AddressNotFoundException("Failed to find address with ID " + address.getId());
+      throw new ObjectNotFoundException("Failed to find address with ID " + address.getId());
     }
   }
 
@@ -89,10 +86,10 @@ public class AddressController {
         addressService.removeAddress(address);
         System.out.println("AddressController.removeAddress(" + address + ")");
       } catch (IllegalArgumentException e){
-        throw new AddressDeletionException("Failed to delete address due to illegal argument");
+        throw new FailedDeletionException("Failed to delete address due to illegal argument");
       }
     } else {
-      throw new AddressNotFoundException("Failed to find address");
+      throw new ObjectNotFoundException("Failed to find address");
     }
   }
 
@@ -104,11 +101,11 @@ public class AddressController {
       addressService.removeAddressById(id);
       System.out.println("AddressController.removeAddressById(" + id + ")");
     } else {
-      throw new AddressNotFoundException("Failed to remove address as address with ID:" + id + "does not exist");
+      throw new ObjectNotFoundException("Failed to remove address with ID:" + id + "does not exist");
     }
   }
 
-  @ExceptionHandler(AddressNotFoundException.class)
+  @ExceptionHandler(ObjectNotFoundException.class)
   @ResponseStatus(
     value = HttpStatus.NOT_ACCEPTABLE,
     reason = "Address not found")
@@ -116,7 +113,7 @@ public class AddressController {
     System.out.println("Handling error for address.");
   }
 
-  @ExceptionHandler(AddressCreationException.class)
+  @ExceptionHandler(FailedCreationException.class)
   @ResponseStatus(
     value = HttpStatus.NOT_IMPLEMENTED,
     reason = "Cannot create/update this address")
