@@ -1,11 +1,14 @@
 package com.informed.ExtProject.controller.reference;
 import com.informed.ExtProject.reference.Currency;
+import com.informed.ExtProject.reference.Currency;
 import com.informed.ExtProject.server.reference.CurrencyService;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("trader")
@@ -30,6 +33,29 @@ public class CurrencyController {
     public void addCurrency(@RequestBody Currency currency) {
         System.out.println("CurrencyController.addCurrency(" + currency + ")");
         currencyService.addCurrency(currency);
+    }
+
+    @GetMapping("/currencies/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Currency getCurrencyById(@PathVariable int id) throws ObjectNotFoundException {
+        Optional<Currency> optionalCurrency = currencyService.getCurrencyById(id);
+        if (optionalCurrency.isPresent()) {
+            return optionalCurrency.get();
+        } else {
+            throw new ObjectNotFoundException("could not find currency");
+        }
+    }
+
+    @DeleteMapping("/currencies/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeCurrencyById(@PathVariable int id) {
+        Optional<Currency> optionalCurrency = currencyService.getCurrencyById(id);
+        if (optionalCurrency.isPresent()) {
+            currencyService.removeCurrencyById(id);
+            System.out.println("CurrencyController.removeCurrencyById(" + id + ")");
+        } else {
+            throw new com.informed.ExtProject.exception.ObjectNotFoundException("Failed to remove currency with ID:" + id + "does not exist");
+        }
     }
 
 }

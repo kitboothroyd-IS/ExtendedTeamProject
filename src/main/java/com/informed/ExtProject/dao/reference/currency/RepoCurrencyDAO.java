@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component("repoCurrencyDAO")
 public class RepoCurrencyDAO implements CurrencyDAO {
@@ -27,4 +28,10 @@ public class RepoCurrencyDAO implements CurrencyDAO {
         this.currencyRepo.save(currency);
     }
 
+    public Optional<Currency> getCurrencyById(int id) {
+        return this.currencyRepo.findById(id);
+    }
+
+    @Transactional
+    public void removeCurrencyById(int id) {this.currencyRepo.deleteById(id);}
 }
