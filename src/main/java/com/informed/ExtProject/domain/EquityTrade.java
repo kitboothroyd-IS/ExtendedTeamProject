@@ -3,6 +3,7 @@ package com.informed.ExtProject.domain;
 import com.informed.ExtProject.reference.Equity;
 import com.informed.ExtProject.reference.Currency;
 import com.informed.ExtProject.reference.Exchange;
+import com.informed.ExtProject.server.reference.ForeignExchangeRateService;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -126,5 +127,18 @@ public class EquityTrade {
 
     public void setExchange(Exchange exchange) {
         this.exchange = exchange;
+    }
+
+    public double getValueOfTrade() {
+        double value = this.amount*this.price;
+        return value;
+    }
+
+    public double getValueOfTradeInCurrency(Currency newCurrency){
+        double exchangeRate = ForeignExchangeRateService.getExchangeRateFor(this.currency, newCurrency);
+        double valueInOrigCurrency = getValueOfTrade();
+        double valueInNewCurrency = valueInOrigCurrency*exchangeRate;
+
+        return valueInNewCurrency;
     }
 }
