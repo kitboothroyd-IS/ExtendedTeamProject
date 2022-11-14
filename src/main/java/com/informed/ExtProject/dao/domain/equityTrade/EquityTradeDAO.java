@@ -1,13 +1,23 @@
 package com.informed.ExtProject.dao.domain.equityTrade;
 
-import com.informed.ExtProject.domain.CounterParty;
 import com.informed.ExtProject.domain.EquityTrade;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EquityTradeDAO {
 
-    List<EquityTrade> getAllEquityTrades();
+  List<EquityTrade> getAllEquityTrades();
 
-    void addEquityTrade(EquityTrade equityTrade);
+  Optional<EquityTrade> getEquityTradeById(int id);
+
+  void addEquityTrade(EquityTrade equityTrade);
+
+  Optional<EquityTrade> updateEquityTrade(EquityTrade equityTrade);
+
+  void removeEquityTrade(EquityTrade equityTrade);
+
+  void removeEquityTradeById(int id);
+
+
 }

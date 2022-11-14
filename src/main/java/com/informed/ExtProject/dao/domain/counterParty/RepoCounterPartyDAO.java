@@ -31,7 +31,7 @@ public class RepoCounterPartyDAO implements CounterPartyDAO {
     @Transactional
     public void addCounterParty(CounterParty counterParty) {
         this.counterPartyRepo.save(counterParty);
-        System.out.println("Added counter party: " + counterParty);
+        System.out.println("Added Counter Party: " + counterParty);
     }
 
     @Transactional
@@ -49,7 +49,7 @@ public class RepoCounterPartyDAO implements CounterPartyDAO {
     @Transactional
     public void removeCounterParty(CounterParty counterParty) {
         this.counterPartyRepo.delete(counterParty);
-        System.out.println("Deleted counter party: " + counterParty);
+        System.out.println("Deleted Counter Party: " + counterParty);
     }
 
     @Transactional

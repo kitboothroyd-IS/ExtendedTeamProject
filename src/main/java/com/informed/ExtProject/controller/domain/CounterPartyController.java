@@ -26,12 +26,12 @@ public class CounterPartyController {
 
     @GetMapping("/counterparties/list")
     @ResponseStatus(HttpStatus.OK)
-    public List<CounterParty> getCounterParties() {
+    public List<CounterParty> getAllCounterParties() {
         List<CounterParty> result = counterPartyService.getAllCounterParties();
         if (result.isEmpty()) {
             throw new ObjectNotFoundException("Could not find any Counter Parties");
         } else {
-            System.out.println("CounterPartyController.getCounterParties()");
+            System.out.println("CounterPartyController.getAllCounterParties()");
             return result;
         }
     }
