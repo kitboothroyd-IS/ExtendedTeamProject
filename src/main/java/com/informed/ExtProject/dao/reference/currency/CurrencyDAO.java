@@ -12,4 +12,6 @@ public interface CurrencyDAO {
     void addCurrency(Currency currency);
 
     Optional<Currency> getCurrencyById(int id);
+
+    void removeCurrencyById(int id);
 }

@@ -1,6 +1,7 @@
 package com.informed.ExtProject.dao.reference.equity;
 
 import com.informed.ExtProject.reference.Equity;
+import com.informed.ExtProject.reference.Equity;
 import com.informed.ExtProject.repo.reference.EquityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component("repoEquityDAO")
 public class RepoEquityDAO implements EquityDAO {
@@ -26,6 +28,13 @@ public class RepoEquityDAO implements EquityDAO {
     public void addEquity(Equity equity) {
         this.equityRepo.save(equity);
     }
+
+    public Optional<Equity> getEquityById(int id) {
+        return this.equityRepo.findById(id);
+    }
+
+    @Transactional
+    public void removeEquityById(int id) {this.equityRepo.deleteById(id);}
 
 }
 
