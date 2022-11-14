@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CurrencyService {
@@ -24,5 +25,9 @@ public class CurrencyService {
 
     public void addCurrency(Currency currency) {
         currencyDAO.addCurrency(currency);
+    }
+
+    public Optional<Currency> getCurrencyById(int id) {
+        return currencyDAO.getCurrencyById(id);
     }
 }
