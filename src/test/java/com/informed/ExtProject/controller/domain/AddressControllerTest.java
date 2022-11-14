@@ -1,7 +1,7 @@
-package com.informed.ExtProject.domain.address;
+package com.informed.ExtProject.controller.domain;
 import com.informed.ExtProject.controller.domain.AddressController;
 import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.domain.config.ServiceTestConfig;
+import com.informed.ExtProject.config.ServiceTestConfig;
 import com.informed.ExtProject.exception.ObjectNotFoundException;
 import com.informed.ExtProject.test.util.AddressFactory;
 import org.assertj.core.api.Assertions;
@@ -50,7 +50,7 @@ public class AddressControllerTest {
     @Test
     public void addAddress() throws Exception {
         Address address = addressFactory.validAddress();
-        addressController.addAddress(address, response);
+        addressController.addAddress(address);
         String urlTemplate = "/trader/addresses/list";
         mockMvc.perform(get(urlTemplate))
                 .andExpect(status().isOk())

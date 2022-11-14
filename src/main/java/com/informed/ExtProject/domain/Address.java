@@ -93,7 +93,16 @@ public class Address {
         this.postcode = postcode;
     }
 
-    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address address)) return false;
+        return getId() == address.getId();
+    }
+
+    public int hashCode() {
+        return getId() + getLine2().hashCode();
+    }
+
     public String toString() {
         return "Address{" +
                 "id=" + id +

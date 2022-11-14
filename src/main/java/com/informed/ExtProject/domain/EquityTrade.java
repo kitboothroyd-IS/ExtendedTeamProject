@@ -18,31 +18,31 @@ public class EquityTrade {
     @GeneratedValue()
     private int id;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="counterParty1Id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "counterParty1Id", nullable = false)
     private CounterParty counterParty1;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="counterParty2Id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "counterParty2Id", nullable = false)
     private CounterParty counterParty2;
     @NotNull
     @DateTimeFormat
     private Date agreementDate;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="equityId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "equityId", nullable = false)
     private Equity equity;
     @NotNull
     private int amount;
     @NotNull
     private Double price;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="currencyId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "currencyId", nullable = false)
     private Currency currency;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="exchangeId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "exchangeId", nullable = false)
     private Exchange exchange;
 
     public EquityTrade() {
@@ -127,4 +127,16 @@ public class EquityTrade {
     public void setExchange(Exchange exchange) {
         this.exchange = exchange;
     }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EquityTrade equityTrade)) return false;
+        return getId() == equityTrade.getId();
+    }
+
+    public int hashCode() {
+        return getId() + getEquity().hashCode();
+    }
+
 }
+
