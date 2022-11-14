@@ -18,18 +18,18 @@ public class EquityTrade {
     @GeneratedValue()
     private int id;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="counterParty1Id", nullable = false)
     private CounterParty counterParty1;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="counterParty2Id", nullable = false)
     private CounterParty counterParty2;
     @NotNull
     @DateTimeFormat
     private Date agreementDate;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="equityId", nullable = false)
     private Equity equity;
     @NotNull
@@ -37,11 +37,11 @@ public class EquityTrade {
     @NotNull
     private Double price;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="currencyId", nullable = false)
     private Currency currency;
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="exchangeId", nullable = false)
     private Exchange exchange;
 
