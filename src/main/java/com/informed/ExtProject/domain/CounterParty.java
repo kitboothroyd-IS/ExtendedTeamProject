@@ -16,7 +16,7 @@ public class CounterParty {
     private String phoneNumber;
     private String emailAddress;
     @NotNull
-    @ManyToOne()
+    @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="addressId", nullable = false)
     private Address address;
 

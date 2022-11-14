@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,7 +60,9 @@ public class CounterPartyServiceTest {
         CounterParty counterParty1 = factory.validCounterParty();
         CounterParty counterParty2 = factory.validCounterPartyEmptyPhone();
 
-        addressService.addAddress(counterParty1.getAddress());
+        Address address = counterParty1.getAddress();
+
+        addressService.addAddress(address);
 
         service.addCounterParty(counterParty1);
         service.addCounterParty(counterParty2);
@@ -72,11 +75,24 @@ public class CounterPartyServiceTest {
 
         service.removeCounterParty(counterParty1);
         service.removeCounterParty(counterParty2);
-        addressService.removeAddress(counterParty1.getAddress());
+        addressService.removeAddressById(address.getId());
     }
 
     @Test
+    @Description("Get Counter Party by ID.")
     void testGetCounterPartyById() {
+        CounterParty counterParty = factory.validCounterPartyNullPhone();
+        Address address = counterParty.getAddress();
+        addressService.addAddress(address);
+
+        service.addCounterParty(counterParty);
+
+        Optional<CounterParty> dbCounterParty = service.getCounterPartyById(counterParty.getId());
+        System.out.printf("Retrieved Counter Party: " + dbCounterParty.get());
+        assertThat(dbCounterParty.get().toString()).isEqualTo(counterParty.toString());
+
+        service.removeCounterParty(counterParty);
+        addressService.removeAddressById(address.getId());
     }
 
     @Test
@@ -84,7 +100,21 @@ public class CounterPartyServiceTest {
     }
 
     @Test
+    @Description("Update a Counter Party.")
     void updateCounterParty() {
+        CounterParty counterParty = factory.validCounterPartyNullEmail();
+        Address address = counterParty.getAddress();
+        addressService.addAddress(address);
+
+        service.addCounterParty(counterParty);
+        service.getCounterPartyById(counterParty.getId());
+        counterParty.setName("NewName");
+        service.updateCounterParty(counterParty);
+        Optional<CounterParty> updatedCounterParty = service.getCounterPartyById(counterParty.getId());
+        System.out.println("Updated Counterparty: " + updatedCounterParty.get());
+        assertThat(updatedCounterParty.get().getName()).isEqualTo("NewName");
+        service.removeCounterParty(counterParty);
+        System.out.println(addressService.getAllAddresses());
     }
 
     @Test
