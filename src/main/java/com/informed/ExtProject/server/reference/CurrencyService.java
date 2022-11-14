@@ -30,4 +30,8 @@ public class CurrencyService {
     public Optional<Currency> getCurrencyById(int id) {
         return currencyDAO.getCurrencyById(id);
     }
+
+    public void removeCurrencyById(int id) {
+        currencyDAO.removeCurrencyById(id);
+    }
 }

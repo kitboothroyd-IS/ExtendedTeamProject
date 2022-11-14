@@ -32,4 +32,6 @@ public class RepoCurrencyDAO implements CurrencyDAO {
         return this.currencyRepo.findById(id);
     }
 
+    @Transactional
+    public void removeCurrencyById(int id) {this.currencyRepo.deleteById(id);}
 }
