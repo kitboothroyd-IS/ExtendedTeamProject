@@ -111,13 +111,13 @@ public class EquityTradeController {
     @ResponseStatus(HttpStatus.OK)
     public double getTradeValueById(@PathVariable int id) {
         Optional<EquityTrade> optionalEquityTrade = equityTradeService.getEquityTradeById(id);
-        double value = -1.0;
         if (optionalEquityTrade.isPresent()) {
             EquityTrade equityTrade = optionalEquityTrade.get();
-            value = equityTrade.getValueOfTrade();
+            double value = equityTrade.getValueOfTrade();
+            return value;
+        } else {
+            throw new ObjectNotFoundException("Equity Trade with ID:" + id + "does not exist");
         }
-
-        return value;
     }
 
     @GetMapping("/equitytrades/{id}/value/{currencyId}")
@@ -125,14 +125,18 @@ public class EquityTradeController {
     public double getTradeValueByIdInCurrency(@PathVariable("id") int id, @PathVariable("currencyId") int currencyId) {
         Optional<EquityTrade> optionalEquityTrade = equityTradeService.getEquityTradeById(id);
         Optional<Currency> optionalCurrency = currencyService.getCurrencyById(currencyId);
-        double value = -1.0;
-        if (optionalEquityTrade.isPresent() && optionalCurrency.isPresent()) {
+        if (optionalEquityTrade.isPresent()) {
             EquityTrade equityTrade = optionalEquityTrade.get();
-            Currency currency = optionalCurrency.get();
-            value = equityTrade.getValueOfTradeInCurrency(currency);
+            if (optionalCurrency.isPresent()) {
+                Currency currency = optionalCurrency.get();
+                double value = equityTrade.getValueOfTradeInCurrency(currency);
+                return value;
+            } else {
+                throw new ObjectNotFoundException("Currency with ID:" + currencyId + "does not exist");
+            }
+        } else {
+            throw new ObjectNotFoundException("Equity Trade with ID:" + id + "does not exist");
         }
-
-        return value;
     }
 
 
