@@ -27,6 +27,7 @@ public class RepoAddressDAO implements AddressDAO {
   public Optional<Address> getAddressById(int id) {
     return this.addressRepo.findById(id);
   }
+
   @Transactional
   public void addAddress(Address address) {
     this.addressRepo.save(address);
@@ -52,7 +53,7 @@ public class RepoAddressDAO implements AddressDAO {
   @Transactional
   public void removeAddress(Address address) {
     this.addressRepo.delete(address);
-    System.out.println("Deleted address with: " + address);
+    System.out.println("Deleted address: " + address);
   }
 
 

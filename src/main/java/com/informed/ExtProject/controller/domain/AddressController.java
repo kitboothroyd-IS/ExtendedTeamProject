@@ -39,7 +39,7 @@ public class AddressController {
 
   @GetMapping("/addresses/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Address getAddressById(@PathVariable int id, HttpServletResponse response) {
+  public Address getAddressById(@PathVariable int id) {
     Optional<Address> result = addressService.getAddressById(id);
     if (result.isPresent()) {
       return result.get();
@@ -51,7 +51,7 @@ public class AddressController {
 
   @PostMapping("/addresses")
   @ResponseStatus(HttpStatus.CREATED)
-  public void addAddress(@RequestBody Address address, HttpServletResponse response) {
+  public void addAddress(@RequestBody Address address) {
     try {
       addressService.addAddress(address);
     } catch (FailedCreationException e) {
@@ -62,7 +62,7 @@ public class AddressController {
 
   @PutMapping("/addresses")
   @ResponseStatus(HttpStatus.OK)
-  public void updateAddress(@RequestBody Address address, HttpServletResponse response) {
+  public void updateAddress(@RequestBody Address address) {
     Optional<Address> addressResult = addressService.getAddressById(address.getId());
     if (addressResult.isPresent()) {
       try {
@@ -79,7 +79,7 @@ public class AddressController {
   //Currently only deleting by ID
   @DeleteMapping("/addresses")
   @ResponseStatus(HttpStatus.OK)
-  public void removeAddress(@RequestBody Address address, HttpServletResponse response) {
+  public void removeAddress(@RequestBody Address address) {
     Optional<Address> optionalAddressById = addressService.getAddressById(address.getId());
     if (optionalAddressById.isPresent()){
       try {
@@ -95,7 +95,7 @@ public class AddressController {
 
   @DeleteMapping("/addresses/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public void removeAddressById(@PathVariable int id, HttpServletResponse response) {
+  public void removeAddressById(@PathVariable int id) {
     Optional<Address> optionalAddress = addressService.getAddressById(id);
     if (optionalAddress.isPresent()) {
       addressService.removeAddressById(id);
@@ -109,7 +109,7 @@ public class AddressController {
   @ResponseStatus(
     value = HttpStatus.NOT_ACCEPTABLE,
     reason = "Address not found")
-  public void addressNotFoundFailure() {
+  public void ObjectNotFoundException() {
     System.out.println("Handling error for address.");
   }
 
@@ -117,7 +117,7 @@ public class AddressController {
   @ResponseStatus(
     value = HttpStatus.NOT_IMPLEMENTED,
     reason = "Cannot create/update this address")
-  public void addressCreationFailure() {
+  public void FailedCreationException() {
     System.out.println("Handling error for address.");
   }
 

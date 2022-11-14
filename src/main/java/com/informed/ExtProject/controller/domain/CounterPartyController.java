@@ -38,7 +38,7 @@ public class CounterPartyController {
 
     @GetMapping("/counterparties/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CounterParty getCounterPartyById(@PathVariable int id, HttpServletResponse response) {
+    public CounterParty getCounterPartyById(@PathVariable int id) {
         Optional<CounterParty> result = counterPartyService.getCounterPartyById(id);
         if (result.isPresent()) {
             return result.get();
@@ -49,7 +49,7 @@ public class CounterPartyController {
 
     @PostMapping("/counterparties")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCounterParty(@RequestBody CounterParty counterParty, HttpServletResponse response) {
+    public void addCounterParty(@RequestBody CounterParty counterParty) {
         try {
             counterPartyService.addCounterParty(counterParty);
             System.out.println("CounterPartyController.addCounterParty(" + counterParty + ")");
@@ -61,7 +61,7 @@ public class CounterPartyController {
 
     @PutMapping("/counterparties")
     @ResponseStatus(HttpStatus.OK)
-    public void updateCounterParty(@RequestBody CounterParty counterParty, HttpServletResponse response) {
+    public void updateCounterParty(@RequestBody CounterParty counterParty) {
         Optional<CounterParty> counterPartyResult = counterPartyService.getCounterPartyById(counterParty.getId());
         if (counterPartyResult.isPresent()) {
             try {
@@ -78,7 +78,7 @@ public class CounterPartyController {
     //Currently only deleting by ID
     @DeleteMapping("/counterparties")
     @ResponseStatus(HttpStatus.OK)
-    public void removeCounterParty(@RequestBody CounterParty counterParty, HttpServletResponse response) {
+    public void removeCounterParty(@RequestBody CounterParty counterParty) {
         Optional<CounterParty> optionalCounterParty = counterPartyService.getCounterPartyById(counterParty.getId());
         if (optionalCounterParty.isPresent()){
             try {
@@ -94,7 +94,7 @@ public class CounterPartyController {
 
     @DeleteMapping("/counterparties/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void removeCounterPartyById(@PathVariable int id, HttpServletResponse response) {
+    public void removeCounterPartyById(@PathVariable int id) {
         Optional<CounterParty> optionalCounterParty = counterPartyService.getCounterPartyById(id);
         if (optionalCounterParty.isPresent()) {
             counterPartyService.removeCounterPartyById(id);
@@ -103,4 +103,21 @@ public class CounterPartyController {
             throw new ObjectNotFoundException("Failed to remove Counter Party with ID:" + id + "does not exist");
         }
     }
+
+    @ExceptionHandler(ObjectNotFoundException.class)
+    @ResponseStatus(
+            value = HttpStatus.NOT_ACCEPTABLE,
+            reason = "Counter Party not found")
+    public void ObjectNotFoundException() {
+        System.out.println("Handling error for Counter Party.");
+    }
+
+    @ExceptionHandler(FailedCreationException.class)
+    @ResponseStatus(
+            value = HttpStatus.NOT_IMPLEMENTED,
+            reason = "Cannot create/update Counter Party")
+    public void FailedCreationException() {
+        System.out.println("Handling error for Counter Party.");
+    }
+
 }
