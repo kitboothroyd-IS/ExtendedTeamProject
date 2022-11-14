@@ -2,11 +2,10 @@ package com.informed.ExtProject.test.util;
 
 import com.informed.ExtProject.domain.CounterParty;
 import com.informed.ExtProject.domain.EquityTrade;
-import com.informed.ExtProject.test.util.CounterPartyFactory;
 import com.informed.ExtProject.reference.Currency;
 import com.informed.ExtProject.reference.Equity;
 import com.informed.ExtProject.reference.Exchange;
-import com.informed.ExtProject.reference.RefDataTestService;
+import com.informed.ExtProject.server.reference.RefDataTestService;
 
 import java.util.Date;
 

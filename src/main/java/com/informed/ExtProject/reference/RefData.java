@@ -1,5 +1,6 @@
 package com.informed.ExtProject.reference;
 
+import com.informed.ExtProject.domain.CounterParty;
 import com.informed.ExtProject.exception.NoSymbolException;
 
 import javax.persistence.*;
@@ -48,4 +49,17 @@ public abstract class RefData {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RefData refData)) return false;
+        return getId() == refData.getId();
+    }
+
+    public int hashCode() {
+        return getId() + getSymbol().hashCode();
+    }
+
 }
+
+

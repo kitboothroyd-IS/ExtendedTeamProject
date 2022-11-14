@@ -1,9 +1,9 @@
-package com.informed.ExtProject.domain.address;
+package com.informed.ExtProject.controller.domain;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.informed.ExtProject.controller.domain.AddressController;
 import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.domain.config.ServiceTestConfig;
+import com.informed.ExtProject.config.ServiceTestConfig;
 import com.informed.ExtProject.exception.ObjectNotFoundException;
 import com.informed.ExtProject.test.util.AddressFactory;
 import org.assertj.core.api.Assertions;
@@ -17,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import javax.servlet.http.HttpServletResponse;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 

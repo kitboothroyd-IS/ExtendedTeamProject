@@ -1,4 +1,12 @@
-package com.informed.ExtProject.reference;
+package com.informed.ExtProject.server.reference;
+
+import com.informed.ExtProject.config.ServiceTestConfig;
+import com.informed.ExtProject.reference.Currency;
+import com.informed.ExtProject.reference.Equity;
+import com.informed.ExtProject.reference.Exchange;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest(classes = {ServiceTestConfig.class})
 
 public class RefDataTestService {
 

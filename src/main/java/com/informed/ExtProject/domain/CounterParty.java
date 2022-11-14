@@ -26,15 +26,8 @@ public class CounterParty {
     public CounterParty(String name, String phoneNumber, String emailAddress, Address address) {
         this.name = name;
         this.address = address;
-
-        // Check that at least the phone number or the email address are valid
-        if ((phoneNumber == null || phoneNumber.length() < 7 || phoneNumber.length() > 15) &&
-                (emailAddress == null || emailAddress.isEmpty())) {
-            throw new IllegalArgumentException("You must provide a valid phone number or email address.");
-        } else {
-            this.phoneNumber = phoneNumber;
-            this.emailAddress = emailAddress;
-        }
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
     }
 
     public int getId() {
@@ -71,6 +64,17 @@ public class CounterParty {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CounterParty counterParty)) return false;
+        return getId() == counterParty.getId();
+    }
+
+    public int hashCode() {
+        return getId() + getEmailAddress().hashCode();
     }
 
     public String toString() {

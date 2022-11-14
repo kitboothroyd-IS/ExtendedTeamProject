@@ -1,7 +1,7 @@
-package com.informed.ExtProject.domain.counterParty;
+package com.informed.ExtProject.domain;
 
 import com.informed.ExtProject.domain.CounterParty;
-import com.informed.ExtProject.domain.config.ServiceTestConfig;
+import com.informed.ExtProject.config.ServiceTestConfig;
 import com.informed.ExtProject.server.domain.CounterPartyService;
 import com.informed.ExtProject.test.util.CounterPartyFactory;
 import org.assertj.core.api.Assertions;
