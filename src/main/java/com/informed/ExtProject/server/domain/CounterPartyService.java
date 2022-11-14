@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.*;
 
 @Component
 public class CounterPartyService {
@@ -28,7 +29,16 @@ public class CounterPartyService {
     }
 
     public void addCounterParty(CounterParty counterParty) {
-        counterPartyDAO.addCounterParty(counterParty);
+        // Check that at least the phone number or email are valid
+        String phoneNumber = counterParty.getPhoneNumber();
+        String emailAddress = counterParty.getEmailAddress();
+        if ((phoneNumber == null || phoneNumber.length() < 7 || phoneNumber.length() > 15) &&
+                (emailAddress == null || emailAddress.isEmpty())) {
+            System.out.println("You must provide a valid email or phone number.");
+            throw new ConstraintViolationException(new HashSet<ConstraintViolation<?>>());
+        } else {
+            counterPartyDAO.addCounterParty(counterParty);
+        }
     }
 
     public Optional<CounterParty> updateCounterParty(CounterParty counterParty) {

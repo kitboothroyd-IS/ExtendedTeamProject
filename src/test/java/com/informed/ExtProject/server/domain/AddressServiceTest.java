@@ -1,7 +1,7 @@
-package com.informed.ExtProject.domain.address;
+package com.informed.ExtProject.server.domain;
 
 import com.informed.ExtProject.domain.Address;
-import com.informed.ExtProject.domain.config.ServiceTestConfig;
+import com.informed.ExtProject.config.ServiceTestConfig;
 import com.informed.ExtProject.server.domain.AddressService;
 import com.informed.ExtProject.test.util.AddressFactory;
 import jdk.jfr.Description;
