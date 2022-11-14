@@ -4,7 +4,10 @@ import com.informed.ExtProject.domain.EquityTrade;
 import com.informed.ExtProject.exception.FailedCreationException;
 import com.informed.ExtProject.exception.FailedDeletionException;
 import com.informed.ExtProject.exception.ObjectNotFoundException;
+import com.informed.ExtProject.reference.Currency;
+import com.informed.ExtProject.reference.Equity;
 import com.informed.ExtProject.server.domain.EquityTradeService;
+import com.informed.ExtProject.server.reference.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class EquityTradeController {
 
     private EquityTradeService equityTradeService;
+    @Autowired
+    CurrencyService currencyService;
 
     @Autowired
     public void setEquityTradeService(EquityTradeService equityTradeService) {
@@ -101,6 +106,35 @@ public class EquityTradeController {
             throw new ObjectNotFoundException("Failed to remove Equity Trade with ID:" + id + "does not exist");
         }
     }
+
+    @GetMapping("/equitytrades/{id}/value")
+    @ResponseStatus(HttpStatus.OK)
+    public double getTradeValueById(@PathVariable int id) {
+        Optional<EquityTrade> optionalEquityTrade = equityTradeService.getEquityTradeById(id);
+        double value = -1.0;
+        if (optionalEquityTrade.isPresent()) {
+            EquityTrade equityTrade = optionalEquityTrade.get();
+            value = equityTrade.getValueOfTrade();
+        }
+
+        return value;
+    }
+
+    @GetMapping("/equitytrades/{id}/value/{currencyId}")
+    @ResponseStatus(HttpStatus.OK)
+    public double getTradeValueByIdInCurrency(@PathVariable("id") int id, @PathVariable("currencyId") int currencyId) {
+        Optional<EquityTrade> optionalEquityTrade = equityTradeService.getEquityTradeById(id);
+        Optional<Currency> optionalCurrency = currencyService.getCurrencyById(currencyId);
+        double value = -1.0;
+        if (optionalEquityTrade.isPresent() && optionalCurrency.isPresent()) {
+            EquityTrade equityTrade = optionalEquityTrade.get();
+            Currency currency = optionalCurrency.get();
+            value = equityTrade.getValueOfTradeInCurrency(currency);
+        }
+
+        return value;
+    }
+
 
     @ExceptionHandler(ObjectNotFoundException.class)
     @ResponseStatus(
