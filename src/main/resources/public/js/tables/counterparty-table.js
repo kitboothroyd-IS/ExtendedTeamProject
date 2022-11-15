@@ -1,9 +1,9 @@
-function generateTable() {
+function generateCounterPartyTable() {
     $(document).ready(function() {
         let getString = "http://localhost:8084/trader/counterparties/list";
         let html = "<h2>Counter Parties:</h2>";
-        $.get(getString, function generateTable(counterparties) {
-            $("#counterparties").empty();
+        $.get(getString, function(counterparties) {
+            $("#counterparty-table").empty();
             let table = "<table>";
             table += "<tr>";
             table += "<th>Name</th>";
@@ -12,7 +12,7 @@ function generateTable() {
             table += "<th>Postcode</th>";
             table += "<th></th>";
             table += "</tr>";
-            counterparties.forEach(function (counterparty) {
+            counterparties.forEach(function(counterparty) {
                 let tr = "<tr>";
                 tr += "<td>" + counterparty.name + "</td>";
                 tr += "<td>" + counterparty.phoneNumber + "</td>";
@@ -25,18 +25,18 @@ function generateTable() {
                 });
             table += "</table>";
             html += table;
-            $("#counterparties").append($(html));
+            $("#counterparty-table").append($(html));
         }).fail(
             function() {
-                $("#counterparties").empty();
+                $("#counterparty-table").empty();
                 console.log("failed");
                 html += "<h3>No counter parties registered.</h3>";
-                $("#counterparties").append($(html));
+                $("#counterparty-table").append($(html));
             });
     });
 }
 
-generateTable();
+generateCounterPartyTable();
 
 function deleteCounterParty(id) {
     console.log("Delete counter party called on counter party with id: " + id);
@@ -47,7 +47,7 @@ function deleteCounterParty(id) {
         type: "DELETE",
         url: deleteString,
         success: function() {
-            generateTable();
+            generateCounterPartyTable();
         }
     });
 }
