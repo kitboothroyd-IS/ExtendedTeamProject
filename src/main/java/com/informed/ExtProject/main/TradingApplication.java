@@ -22,5 +22,7 @@ public class TradingApplication
         System.out.println("Server ready");
         System.out.println("========================");
 
+        System.out.println("http://localhost:8084/counter-party-registration.html");
+
     }
 }
