@@ -22,6 +22,9 @@ public class TradingApplication
         System.out.println("Server ready");
         System.out.println("========================");
 
+        System.out.println("http://localhost:8084/counter-party-address.html");
+        System.out.println("http://localhost:8084/counter-party-details.html");
+        
         System.out.println("Url: http://localhost:8084/new-equity-trade.html");
 
         new populateDatabase();
