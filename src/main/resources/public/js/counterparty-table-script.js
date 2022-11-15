@@ -1,8 +1,9 @@
 function generateTable() {
     $(document).ready(function() {
-        $.get("http://localhost:8084/trader/counterparties/list", function generateTable(counterparties) {
+        let getString = "http://localhost:8084/trader/counterparties/list";
+        let html = "<h2>Counter Parties:</h2>";
+        $.get(getString, function generateTable(counterparties) {
             $("#counterparties").empty();
-            let html = "<h2>Counter Parties:</h2>"
             let table = "<table>";
             table += "<tr>";
             table += "<th>Name</th>";
@@ -25,7 +26,13 @@ function generateTable() {
             table += "</table>";
             html += table;
             $("#counterparties").append($(html));
-        });
+        }).fail(
+            function() {
+                $("#counterparties").empty();
+                console.log("failed");
+                html += "<h3>No counter parties registered.</h3>";
+                $("#counterparties").append($(html));
+            });
     });
 }
 
