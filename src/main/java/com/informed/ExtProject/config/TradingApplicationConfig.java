@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages =
         {"com.informed.ExtProject.server",
-        "com.informed.ExtProject.controller"})
+        "com.informed.ExtProject.controller",
+        "com.informed.ExtProject.data"})
 public class TradingApplicationConfig {
 }

@@ -2,9 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Equity Trade</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="js/jquery.serializejson.js"></script>
+    <script src="js/equitytrade-script.js"></script>
 </head>
-<body>
+<body onload="setup()">
+    <h1>Equity Trade Hub</h1>
+    <p>Your home for buying and selling company shares and stocks.</p>
+    <img src="https://www.eightcap.com/en/wp-content/uploads/sites/11/2019/09/stocks-equiti.jpg"
+         alt="Man's hands holding a phone with with a laptop in the background and images of charts and numbers overlapping on top."
+         width="40%"/>
+    <br />
+    <form>
+        <input type="button" value="View equity trades" onclick="showEquityTrades()"/>
+    </form>
+    <div id="equitytrades"></div>
+
 
 </body>
 </html>
