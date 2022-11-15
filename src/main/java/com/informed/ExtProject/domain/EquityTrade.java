@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -28,7 +29,7 @@ public class EquityTrade {
     private CounterParty counterParty2;
     @NotNull
     @DateTimeFormat
-    private Date agreementDate;
+    private LocalDate agreementDate;
     @NotNull
     @ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="equityId", nullable = false)
@@ -50,7 +51,7 @@ public class EquityTrade {
 
     }
 
-    public EquityTrade(CounterParty counterParty1, CounterParty counterParty2, Date agreementDate, Equity equity, int amount, Double price, Currency currency, Exchange exchange) {
+    public EquityTrade(CounterParty counterParty1, CounterParty counterParty2, LocalDate agreementDate, Equity equity, int amount, Double price, Currency currency, Exchange exchange) {
         this.counterParty1 = counterParty1;
         this.counterParty2 = counterParty2;
         this.agreementDate = agreementDate;
@@ -81,11 +82,11 @@ public class EquityTrade {
         this.counterParty2 = counterParty2;
     }
 
-    public Date getAgreementDate() {
+    public LocalDate getAgreementDate() {
         return agreementDate;
     }
 
-    public void setAgreementDate(Date agreementDate) {
+    public void setAgreementDate(LocalDate agreementDate) {
         this.agreementDate = agreementDate;
     }
 
