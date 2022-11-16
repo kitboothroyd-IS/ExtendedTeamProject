@@ -1,5 +1,15 @@
+function showHide(docId) {
+  const doc = document.getElementById(docId);
+  if (doc.style.display === 'block') {
+    doc.style.display = 'none';
+  } else {
+    doc.style.display = 'block';
+};
+}
+
 function showEquityTrades() {
     console.log("Clicked 'View equity trades'.")
+    showHide("equitytrades");
     $.get("http://localhost:8084/trader/equitytrades/list",
         function(equitytrades) {
             $("#equitytrades").empty();
@@ -27,24 +37,5 @@ function showEquityTrades() {
 }
 
 function addEquityTrade() {
-  const form = document.getElementById('form');
-
-  if (form.style.display === 'block') {
-    form.style.display = 'none';
-  } else {
-    form.style.display = 'block';
-  }
-};
-
-
-    // let obj = $(this).serializeJSON();
-    // let data = JSON.stringify(obj);
-
-    // $.ajax({
-    // type: "POST",
-    // url: "http://localhost:8082/bookshop/addresses",
-    // data: data,
-    // contentType: "application/json; charset=utf-8",
-    // dataType: "json"
-    // }
-    // );
+  showHide("form");
+}

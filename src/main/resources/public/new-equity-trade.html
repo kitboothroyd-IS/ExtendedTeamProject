@@ -18,14 +18,14 @@
     <br>
     <br>
     <form>
-        <input type="button" value="View equity trades" onclick="showEquityTrades()"/>
+        <input type="button" value="View equity trades" onclick="showEquityTrades()" style="display=none"/>
     </form>
     <div id="equitytrades"></div>
     <br>
 
-    <button onclick="addEquityTrade()">Add new equity trade</button>
+    <input type="button" value="Add new equity trade" onclick="addEquityTrade()"/>
 
-    <form id="form">
+    <form id="form"  style="display: none">
         <br>
         Counter Party 1: <input type="text" /><br><br>
         Counter Party 2: <input type="text" /><br><br>
