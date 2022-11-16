@@ -154,8 +154,8 @@ public class populateDatabase implements ApplicationListener<ApplicationReadyEve
         counterPartyService.addCounterParty(cp1);
         counterPartyService.addCounterParty(cp2);
 
-        String dateString = "January 2, 2010";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
+        String dateString = "22/11/2010";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
         LocalDate date = LocalDate.parse(dateString, formatter);
         System.out.println(date);
 
