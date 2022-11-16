@@ -1,21 +1,19 @@
 function generateCurrencyTable() {
     $(document).ready(function() {
         let getString = "http://localhost:8084/trader/currencies";
-        let html = "<h2>Currencies:</h2>";
+        let html = "<h4>Currencies:</h4>";
         $.get(getString, function(currencies) {
             $("#currency-table").empty();
             let table = "<table>";
             table += "<tr>";
             table += "<th>Name</th>";
             table += "<th>Symbol</th>";
-            table += "<th></th>";
             table += "</tr>";
             currencies.forEach(function(currency) {
                 let tr = "<tr>";
                 tr += "<td>" + currency.name + "</td>";
                 tr += "<td>" + currency.symbol + "</td>";
                 let id = currency.id;
-                tr += '<td><button onclick="deleteCurrency('+ id + ')">Delete</button></td>';
                 tr += "</tr>";
                 table += tr;
                 });

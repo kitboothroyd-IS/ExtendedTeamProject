@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script src="js/jquery.serializejson.js"></script>
     <script src="js/equitytrade-script.js"></script>
+    <script src = "js/tables/equitytrade-table.js"></script>
 </head>
 <body style="padding-left: 80px; padding-top: 30px">
     <h1>Equity Trade Hub</h1>
@@ -17,10 +18,7 @@
          width="40%"/>
     <br>
     <br>
-    <form>
-        <input type="button" value="View equity trades" onclick="showEquityTrades()"/>
-    </form>
-    <div id="equitytrades"></div>
+    <div id="equitytrade-table"></div>
     <br>
 
     <button onclick="addEquityTrade()">Add new equity trade</button>
@@ -36,7 +34,8 @@
         Currency: <input type="text" /><br><br>
         Exchange: <input type="text" /><br><br>
     </form>
-
+    
+    <a href="index.html">Return Home</a>
 
 </body>
 </html>
