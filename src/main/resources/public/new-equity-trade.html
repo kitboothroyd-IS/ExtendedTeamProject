@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/styles.css"/>
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script src="js/jquery.serializejson.js"></script>
-    <script src="js/equitytrade-script.js"></script>
     <script src = "js/tables/equitytrade-table.js"></script>
 </head>
 <body>
@@ -24,25 +23,58 @@
     <form>
         <button class="btn" value="View equity trades" onclick="showEquityTrades()" style="display=none">View equity trades</button>
     </form>
-    <!--<div id="equitytrades"></div>-->
-    <div id="equitytrade-table"></div>
+    <div id="equitytrade-table" style="display: none"></div>
     <br>
 
     <button class="btn" value="Add new equity trade" onclick="addEquityTrade()">Add new equity trade</button>
 
-    <form id="form"  style="display: none">
-        <br>
-        Counter Party 1: <input type="text" /><br><br>
-        Counter Party 2: <input type="text" /><br><br>
-        Agreement date: <input type="text" /><br><br>
-        Equity: <input type="text" /><br><br>
-        Amount: <input type="text" /><br><br>
-        Price: <input type="text" /><br><br>
-        Currency: <input type="text" /><br><br>
-        Exchange: <input type="text" /><br><br>
-    </form>
-    </br>
-    <a href="index.html">Return Home</a>
+    <div class="ETRegistration">
+        <form id="ETRegistrationDetailsForm" action="#" style="display: none">
+
+                <br>
+                <div class="formBox">
+                    <label>Counter Party 1:</label>
+                    <select class="counterpartyOptions" name="counterparty"></select>
+                </div>
+                <br>
+                <div class="formBox">
+                    <label>Counter Party 2:</label>
+                    <select class="counterpartyOptions" name="counterparty"></select>
+                </div>
+                <br>
+                <div class="formBox">
+                    <label>Agreement date:</label>
+                    <input type="date" name="name" id="agreementDate" required>
+                </div>
+                <br>
+                <div class="formBox">
+                    <label>Equity:</label>
+                    <select id="equityOptions" name="equity"></select>
+                </div>
+                <br>
+                <div class="formBox">
+                    <label>Amount:</label>
+                    <input type="text" name="amount" id="etAmount" required>
+                </div>
+                <br>
+                <div class="formBox">
+                    <label>Price:</label>
+                    <input type="text" name="price" id="agreementPrice" required>
+                </div>
+                <br>
+                <div class="formBox">
+                    <label>Currency:</label>
+                    <select id="currencyOptions" name="currency"></select>
+                </div>
+                <br>
+                <div class="formBox">
+                    <label>Exchange:</label>
+                    <select id="exchangeOptions" name="exchange"></select>
+                </div>
+            </form>
+
+    </div>
+    <script src="js/equitytrade-script.js"></script>
 
 </body>
 </html>

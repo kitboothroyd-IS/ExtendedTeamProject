@@ -9,33 +9,93 @@ function showHide(docId) {
 
 function showEquityTrades() {
     console.log("Clicked 'View equity trades'.")
-    showHide("equitytrades");
-    $.get("http://localhost:8084/trader/equitytrades/list",
-        function(equitytrades) {
-            $("#equitytrades").empty();
-            console.log(equitytrades);
-
-            let html = "<div id='equitytrades'>";
-            $.each(equitytrades, function(i, equitytrade) {
-                console.log(equitytrade);
-                html += "<h3 class='title'>Equity trade " + equitytrade.id + ": </h3>";
-                html += "<p>";
-                html += "Counter Party 1: " + equitytrade.counterParty1.name + "<br>";
-                html += "Counter Party 2: " + equitytrade.counterParty2.name + "<br>";
-                html += "Agreement date: " + equitytrade.agreementDate + "<br>";
-                html += "Equity: " + equitytrade.equity.name + "<br>";
-                html += "Amount: " + equitytrade.amount + "<br>";
-                html += "Price: " + equitytrade.price + "<br>";
-                html += "Currency: " + equitytrade.currency.symbol + "<br>";
-                html += "Exchange: " + equitytrade.exchange.name;
-                html += "</p>";
-            });
-            html += "</div";
-            $("#equitytrades").append($(html));
-    });
-    console.log("Finished showing equity trades.");
+    showHide("equitytrade-table");
 }
 
+// Create a drop-down menu for counterparties
+let counterpartyList = [];
+
+$.get("http://localhost:8084/trader/counterparties/list",
+	function (counterparties) {
+		counterpartyList = counterparties;
+		//console.log(counterparties);
+		$(".counterpartyOptions").empty();
+		let html = "";
+		$.each(counterparties, function (i, counterparty) {
+			console.log(counterparty);
+			let option = "<option value=" + counterparty.id + ">";
+			option += counterparty.name + ", ";
+      option += counterparty.phoneNumber + ", "; 
+      option += counterparty.emailAddress + ", "; 
+      option += "address: " + counterparty.address.line1 + ", " + counterparty.address.city  + ", " + counterparty.address.postcode;
+			option += "</option>";
+			html += option;
+		});
+		// html += "</select>";
+		$(".counterpartyOptions").append($(html));
+	}
+);
+
+let equityList = [];
+
+$.get("http://localhost:8084/trader/equities",
+	function (equities) {
+		equityList = equities;
+		//console.log(equities);
+		$("#equityOptions").empty();
+		let html = "<br>";
+		$.each(equities, function (i, equity) {
+			console.log(equity);
+			let option = "<option value=" + equity.id + ">";
+			option += equity.name;
+			option += "</option>";
+			html += option;
+		});
+		// html += "</select>";
+		$("#equityOptions").append($(html));
+	}
+);
+
+let currencyList = [];
+
+$.get("http://localhost:8084/trader/currencies",
+	function (currencies) {
+		currencyList = currencies;
+		//console.log(currencies);
+		$("#currencyOptions").empty();
+		let html = "<br>";
+		$.each(currencies, function (i, currency) {
+			console.log(currency);
+			let option = "<option value=" + currency.id + ">";
+			option += currency.symbol;
+			option += "</option>";
+			html += option;
+		});
+		// html += "</select>";
+		$("#currencyOptions").append($(html));
+	}
+);
+
+let exchangeList = [];
+
+$.get("http://localhost:8084/trader/exchanges",
+	function (exchanges) {
+		exchangeList = exchanges;
+		//console.log(exchanges);
+		$("#exchangeOptions").empty();
+		let html = "<br>";
+		$.each(exchanges, function (i, exchange) {
+			console.log(exchange);
+			let option = "<option value=" + exchange.id + ">";
+			option += exchange.name;
+			option += "</option>";
+			html += option;
+		});
+		// html += "</select>";
+		$("#exchangeOptions").append($(html));
+	}
+);
+
 function addEquityTrade() {
-  showHide("form");
+  showHide("ETRegistrationDetailsForm");
 }
