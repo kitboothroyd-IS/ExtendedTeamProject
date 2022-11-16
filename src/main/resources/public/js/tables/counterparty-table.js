@@ -1,7 +1,7 @@
 function generateCounterPartyTable() {
     $(document).ready(function() {
         let getString = "http://localhost:8084/trader/counterparties/list";
-        let html = "<h2>Counter Parties:</h2>";
+        let html = "<h4>Counter Parties:</h4>";
         $.get(getString, function(counterparties) {
             $("#counterparty-table").empty();
             let table = "<table>";

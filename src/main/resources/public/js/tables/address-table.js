@@ -1,7 +1,7 @@
 function generateAddressTable() {
     $(document).ready(function() {
         let getString = "http://localhost:8084/trader/addresses/list";
-        let html = "<h2>Addresses:</h2>";
+        let html = "<h4>Addresses:</h4>";
         $.get(getString, function(addresses) {
             $("#address-table").empty();
             let table = "<table>";
@@ -52,5 +52,8 @@ function deleteAddress(id) {
         success: function() {
             generateAddressTable();
         }
-    });
+    }).fail(function(xhr, textStatus, errorThrown) {
+        alert(xhr.responseText);
+        }
+    ); 
 }
