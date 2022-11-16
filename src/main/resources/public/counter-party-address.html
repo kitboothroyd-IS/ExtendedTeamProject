@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Counter Party Address</title>
 
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script src="js/jquery.serializejson.js"></script>
@@ -14,45 +14,48 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<h1 class="title">Counter Party</h1>
-<div id="address-table"></div>
-<div class="Registration">
-    <form id="RegistrationAddressForm" action="#">
-        <h2>Registration</h2>
-        <span>Address:</span>
-        <div class="formBox">
-            <label>Line 1:</label>
-            <input type="text" name="line1" id="RegisterLine1" placeholder="Address Line 1" required>
-        </div>
-        <div class="formBox">
-            <label>Line 2:</label>
-            <input type="text" name="line2" id="RegisterLine2" placeholder="Address Line 2 (Optional)">
-        </div>
-        <div class="formBox">
-            <label>Line 3:</label>
-            <input type="text" name="line3" id="RegisterLine3" placeholder="Address Line 3 (Optional)">
-        </div>
-        <div class="formBox">
-            <label>City:</label>
-            <input type="text" name="city" id="RegisterCity" placeholder="City" required>
-        </div>
-        <div class="formBox">
-            <label>County:</label>
-            <input type="text" name="county" id="RegisterCounty" placeholder="County" required>
-        </div>
-        <div class="formBox">
-            <label>Postcode:</label>
-            <input type="text" name="postcode" id="RegisterPostCode" placeholder="Postcode" required>
-        </div>
+    <h1 class="title">Counter Party</h1>
+    <nav>        
+        <a href="index.html"><button class="btn">HOME PAGE</a></button>
+    </nav>
+    <div id="address-table"></div>
+    <div class="Registration">
+        <form id="RegistrationAddressForm" action="#">
+            <h2>Registration</h2>
+            <span>Address:</span><br>
+            <div class="formBox">
+                <label>Line 1:</label>
+                <input type="text" name="line1" id="RegisterLine1" placeholder="Address Line 1" required>
+            </div><br>
+            <div class="formBox">
+                <label>Line 2:</label>
+                <input type="text" name="line2" id="RegisterLine2" placeholder="Address Line 2 (Optional)">
+            </div><br>
+            <div class="formBox">
+                <label>Line 3:</label>
+                <input type="text" name="line3" id="RegisterLine3" placeholder="Address Line 3 (Optional)">
+            </div><br>
+            <div class="formBox">
+                <label>City:</label>
+                <input type="text" name="city" id="RegisterCity" placeholder="City" required>
+            </div><br>
+            <div class="formBox">
+                <label>County:</label>
+                <input type="text" name="county" id="RegisterCounty" placeholder="County" required>
+            </div><br>
+            <div class="formBox">
+                <label>Postcode:</label>
+                <input type="text" name="postcode" id="RegisterPostCode" placeholder="Postcode" required>
+            </div>
+            <br>
+            <button id="RegisterBtn" class="btn">Submit Address</button>
+        </form>
         <br>
-        <button id="RegisterBtn" class="btn">Submit Address</button>
-    </form>
-    <br>
-    <a href="counter-party-details.html"><button class="btn">Next Page</button></a>
-    
-</div>
+        <a href="counter-party-details.html"><button class="btn">Next Page</button></a>
+        
+    </div>
 
-<script src="js/counter-party-address.js"></script>
+    <script src="js/counter-party-address.js"></script>
 
 
 </body>
