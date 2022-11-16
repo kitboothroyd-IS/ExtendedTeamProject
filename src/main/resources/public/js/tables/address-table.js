@@ -22,7 +22,7 @@ function generateAddressTable() {
                 tr += "<td>" + address.county + "</td>";
                 tr += "<td>" + address.postcode + "</td>";
                 let id = address.id;
-                tr += '<td><button onclick="deleteAddress('+ id + ')">Delete</button></td>';
+                tr += '<td><button class="btn" onclick="deleteAddress('+ id + ')">Delete</button></td>';
                 tr += "</tr>";
                 table += tr;
                 });
@@ -52,8 +52,7 @@ function deleteAddress(id) {
         success: function() {
             generateAddressTable();
         }
-    }).fail(function(xhr, textStatus, errorThrown) {
-        alert(xhr.responseText);
-        }
-    ); 
+    }).fail(function(){
+        alert("You cannot delete this address because it relates to a registered counter party.");
+    });
 }
