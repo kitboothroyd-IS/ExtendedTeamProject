@@ -10,8 +10,11 @@
     <script src="js/equitytrade-script.js"></script>
     <script src = "js/tables/equitytrade-table.js"></script>
 </head>
-<body style="padding-left: 80px; padding-top: 30px">
+<body>
     <h1>Equity Trade Hub</h1>
+    <nav>        
+        <a href="index.html"><button class="btn">HOME PAGE</button></a>
+    </nav>
     <p>Your home for buying and selling company shares and stocks.</p>
     <img src="https://www.eightcap.com/en/wp-content/uploads/sites/11/2019/09/stocks-equiti.jpg"
          alt="Man's hands holding a phone with with a laptop in the background and images of charts and numbers overlapping on top."
@@ -19,13 +22,13 @@
     <br>
     <br>
     <form>
-        <input type="button" value="View equity trades" onclick="showEquityTrades()" style="display=none"/>
+        <button class="btn" value="View equity trades" onclick="showEquityTrades()" style="display=none">View equity trades</button>
     </form>
     <!--<div id="equitytrades"></div>-->
     <div id="equitytrade-table"></div>
     <br>
 
-    <input type="button" value="Add new equity trade" onclick="addEquityTrade()"/>
+    <button class="btn" value="Add new equity trade" onclick="addEquityTrade()">Add new equity trade</button>
 
     <form id="form"  style="display: none">
         <br>
