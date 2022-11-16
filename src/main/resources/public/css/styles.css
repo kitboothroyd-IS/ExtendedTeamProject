@@ -9,6 +9,7 @@ body{
 .btn{
     background-color: rgb(1, 55, 130);
     color: white;
+    margin-top: 5px;
 }
 
 .btn:hover{
@@ -26,4 +27,12 @@ a:hover {
 
 #imgHome, #navHome{
 margin-top: 20px;
+}
+
+div{
+    margin-top: 5px;
+}
+
+table, h4{
+    margin-top: 10px;
 }
