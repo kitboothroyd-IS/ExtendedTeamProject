@@ -19,7 +19,7 @@ function generateCounterPartyTable() {
                 tr += "<td>" + counterparty.emailAddress + "</td>";
                 tr += "<td>" + counterparty.address.postcode + "</td>";
                 let id = counterparty.id;
-                tr += '<td><button onclick="deleteCounterParty('+ id + ')">Delete</button></td>';
+                tr += '<td><button class="btn" onclick="deleteCounterParty('+ id + ')">Delete</button></td>';
                 tr += "</tr>";
                 table += tr;
                 });
@@ -49,5 +49,7 @@ function deleteCounterParty(id) {
         success: function() {
             generateCounterPartyTable();
         }
+    }).fail(function(){
+        alert("You cannot delete this counter party because it relates to a registered equity trade.");
     });
 }
