@@ -27,7 +27,7 @@ function generateEquitytradeTable() {
                 tr += "<td>" + equitytrade.currency.symbol + "</td>";
                 tr += "<td>" + equitytrade.exchange.symbol + "</td>";
                 let id = equitytrade.id;
-                tr += '<td><button onclick="deleteEquitytrade('+ id + ')">Delete</button></td>';
+                tr += '<td><button class="btn" onclick="deleteEquitytrade('+ id + ')">Delete</button></td>';
                 tr += "</tr>";
                 table += tr;
                 });

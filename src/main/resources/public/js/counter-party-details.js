@@ -56,3 +56,33 @@ $(function () {
 	});
 	
 });
+
+
+function showCounterParties() {
+    console.log("Clicked 'View Counter Parties'.")
+    $.get("http://localhost:8084/trader/counterparties/list",
+        function(counterParties) {
+            $("#counterPartiesList").empty();
+            console.log(counterParties);
+
+            let html = "<div id='counterPartiesList'>";
+            $.each(counterParties, function(i, counterParty) {
+                console.log(counterParty);
+                html += "<h3 class='title'>Counter Party " + counterParty.id + ": </h3>";
+                html += "<p>";
+                html += "Name: " + counterParty.name + "<br>";
+                html += "Phone Number: " + counterParty.phoneNumber + "<br>";
+                html += "Email Address: " + counterParty.emailAddress + "<br>";
+                html += "<label>Address: </label>Line 1:" + counterParty.address.line1 + "<br>";
+                html += "Line 2: " + counterParty.address.line2 + "<br>";
+                html += "Line 3: " + counterParty.address.line3 + "<br>";
+                html += "City: " + counterParty.address.city + "<br>";
+				html += "County: " + counterParty.address.county + "<br>";
+                html += "Postcode: " + counterParty.address.postcode;
+                html += "</p>";
+            });
+            html += "</div";
+            $("#counterPartiesList").append($(html));
+    });
+    console.log("Finished showing Counter Parties.");
+}

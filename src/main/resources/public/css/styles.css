@@ -1,8 +1,29 @@
-.h1 {
-    color: blue
+body{
+    margin-left: 80px; 
+    margin-top: 30px;
 }
-
-
 #form{
     display:none;
+}
+
+.btn{
+    background-color: rgb(1, 55, 130);
+    color: white;
+}
+
+.btn:hover{
+    border-color: rgb(1, 55, 130);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: rgb(1, 55, 130);
+}
+
+#imgHome, #navHome{
+margin-top: 20px;
 }
