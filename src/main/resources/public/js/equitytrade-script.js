@@ -12,6 +12,11 @@ function showEquityTrades() {
     showHide("equitytrade-table");
 }
 
+function addEquityTrades() {
+  console.log("Clicked 'Add equity trade'.")
+  showHide("ETRegistrationDetailsForm");
+}
+
 // Create a drop-down menu for counterparties
 let counterpartyList = [];
 
@@ -99,3 +104,78 @@ $.get("http://localhost:8084/trader/exchanges",
 function addEquityTrade() {
   showHide("ETRegistrationDetailsForm");
 }
+
+
+$(function () {
+	
+	console.log("Adding registration details.")
+	$("#ETRegistrationDetailsForm").submit(function(event){
+		console.log(event);
+
+		let obj = $(this).serializeJSON();
+
+    // Retrieve counter party objects
+		const counterParty1Id = obj['counterparty1'];
+    const counterParty2Id = obj['counterparty2'];
+
+		let cp1Lookup = '';
+    let cp2Lookup = '';
+		for (let i =0; i < counterpartyList.length; i++) {
+			if (counterpartyList[i].id == counterParty1Id) {
+				cp1Lookup = counterpartyList[i];
+			}
+			if (counterpartyList[i].id == counterParty2Id) {
+				cp2Lookup = counterpartyList[i];
+		}
+  }
+
+		obj['counterparty1'] = cp1Lookup;
+		obj['counterparty2'] = cp2Lookup;
+
+    // Retrieve equity object
+    const equityId = obj['equity'];
+
+		let equityLookup = '';
+		for (let i =0; i < equityList.length; i++) {
+			if (equityList[i].id == equityId) {
+				equityLookup = equityList[i];
+			}
+    }
+
+		obj['equity'] = equityLookup;
+
+    // Retrieve currency object
+    const currencyId = obj['currency'];
+
+		let currencyLookup = '';
+		for (let i =0; i < currencyList.length; i++) {
+			if (currencyList[i].id == currencyId) {
+				currencyLookup = currencyList[i];
+			}
+    }
+
+		obj['currency'] = currencyLookup;
+
+    // Retrieve exchange object
+    const exchangeId = obj['exchange'];
+
+		let exchangeLookup = '';
+		for (let i =0; i < exchangeList.length; i++) {
+			if (exchangeList[i].id == exchangeId) {
+				exchangeLookup = exchangeList[i];
+			}
+    }
+
+		obj['exchange'] = exchangeLookup;
+		
+		let data = JSON.stringify(obj);
+
+		$.ajax( {
+			type: "POST",
+			url: "http://localhost:8084/trader/equitytrades",
+			data: data,
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		});
+  });
+});
