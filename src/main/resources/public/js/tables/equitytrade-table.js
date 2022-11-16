@@ -1,7 +1,7 @@
 function generateEquitytradeTable() {
     $(document).ready(function() {
         let getString = "http://localhost:8084/trader/equitytrades/list";
-        let html = "<h4>Equity Trades:</h4>";
+        let html = "<br><h4>Equity Trades:</h4>";
         $.get(getString, function(equitytrades) {
             $("#equitytrade-table").empty();
             let table = "<table>";
@@ -38,7 +38,7 @@ function generateEquitytradeTable() {
             function() {
                 $("#equitytrade-table").empty();
                 console.log("failed");
-                html += "<h3>No equitytrades registered.</h3>";
+                html += "<p>No equity trades registered.</p>";
                 $("#equitytrade-table").append($(html));
             });
     });
