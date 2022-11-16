@@ -52,8 +52,8 @@ function deleteAddress(id) {
         success: function() {
             generateAddressTable();
         }
-    }).fail(function(xhr, textStatus, errorThrown) {
-        alert(xhr.responseText);
+    }).fail(function(err) {
+        alert('aaaa' + err.status);
         }
     ); 
 }
