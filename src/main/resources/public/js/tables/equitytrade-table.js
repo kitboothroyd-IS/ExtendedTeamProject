@@ -1,7 +1,7 @@
 function generateEquitytradeTable() {
     $(document).ready(function() {
         let getString = "http://localhost:8084/trader/equitytrades/list";
-        let html = "<h2>Equity Trades:</h2>";
+        let html = "<h4>Equity Trades:</h4>";
         $.get(getString, function(equitytrades) {
             $("#equitytrade-table").empty();
             let table = "<table>";

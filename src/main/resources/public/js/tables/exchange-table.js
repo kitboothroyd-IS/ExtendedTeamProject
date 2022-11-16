@@ -1,21 +1,19 @@
 function generateExchangeTable() {
     $(document).ready(function() {
         let getString = "http://localhost:8084/trader/exchanges";
-        let html = "<h2>Exchanges:</h2>";
+        let html = "<h4>Exchanges:</h4>";
         $.get(getString, function(exchanges) {
             $("#exchange-table").empty();
             let table = "<table>";
             table += "<tr>";
             table += "<th>Name</th>";
             table += "<th>Symbol</th>";
-            table += "<th></th>";
             table += "</tr>";
             exchanges.forEach(function(exchange) {
                 let tr = "<tr>";
                 tr += "<td>" + exchange.name + "</td>";
                 tr += "<td>" + exchange.symbol + "</td>";
                 let id = exchange.id;
-                tr += '<td><button onclick="deleteExchange('+ id + ')">Delete</button></td>';
                 tr += "</tr>";
                 table += tr;
                 });
