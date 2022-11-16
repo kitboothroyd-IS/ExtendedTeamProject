@@ -2,9 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Equity Trade</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="js/jquery.serializejson.js"></script>
+    <script src="js/equitytrade-script.js"></script>
 </head>
-<body>
+<body style="padding-left: 80px; padding-top: 30px">
+    <h1>Equity Trade Hub</h1>
+    <p>Your home for buying and selling company shares and stocks.</p>
+    <img src="https://www.eightcap.com/en/wp-content/uploads/sites/11/2019/09/stocks-equiti.jpg"
+         alt="Man's hands holding a phone with with a laptop in the background and images of charts and numbers overlapping on top."
+         width="40%"/>
+    <br>
+    <br>
+    <form>
+        <input type="button" value="View equity trades" onclick="showEquityTrades()"/>
+    </form>
+    <div id="equitytrades"></div>
+    <br>
+
+    <button onclick="addEquityTrade()">Add new equity trade</button>
+
+    <form id="form">
+        <br>
+        Counter Party 1: <input type="text" /><br><br>
+        Counter Party 2: <input type="text" /><br><br>
+        Agreement date: <input type="text" /><br><br>
+        Equity: <input type="text" /><br><br>
+        Amount: <input type="text" /><br><br>
+        Price: <input type="text" /><br><br>
+        Currency: <input type="text" /><br><br>
+        Exchange: <input type="text" /><br><br>
+    </form>
+
 
 </body>
 </html>

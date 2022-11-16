@@ -7,6 +7,7 @@ import com.informed.ExtProject.reference.Equity;
 import com.informed.ExtProject.reference.Exchange;
 import com.informed.ExtProject.server.reference.RefDataTestService;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class EquityTradeFactory {
@@ -16,7 +17,7 @@ public class EquityTradeFactory {
 
     private CounterParty counterParty1 = counterPartyFactory.validCounterPartyEmptyPhone();
     private CounterParty counterParty2 = counterPartyFactory.validCounterPartyNullPhone();
-    private Date agreementDate = new Date();
+    private LocalDate agreementDate = null;
     private Equity equity = refDataTestService.validEquity();
     private Currency currency = refDataTestService.validCurrency();
     private Exchange exchange = refDataTestService.validExchange();
