@@ -1,7 +1,17 @@
+function showHide(docId) {
+  const doc = document.getElementById(docId);
+  if (doc.style.display === 'block') {
+    doc.style.display = 'none';
+  } else {
+    doc.style.display = 'block';
+};
+}
+
 function generateEquityTable() {
     $(document).ready(function() {
         let getString = "http://localhost:8084/trader/equities";
         let html = "<h4>Equities:</h4>";
+        showHide("equity-table");
         $.get(getString, function(equities) {
             $("#equity-table").empty();
             let table = "<table>";
